@@ -29,6 +29,13 @@ agent — with two deliberate changes:
 Everything else — providers, models, the TUI, the desktop app, the SDK — is upstream opencode, kept
 in sync automatically. We're a thin, honest layer, not a rewrite.
 
+> [!IMPORTANT]
+> **This is a personal project.** WideOpenCode is built and maintained by
+> [@judggernaut](https://github.com/judggernaut) in a personal capacity. It is **not** affiliated
+> with, endorsed by, sponsored by, or supported by GitHub, Inc., and nothing in this repository
+> represents the views, positions, or practices of GitHub or its employees. See
+> [DISCLAIMER.md](./DISCLAIMER.md).
+
 > [!NOTE]
 > WideOpenCode is a fork, not a vendored copy. We track upstream closely, so you get the newest
 > opencode features within hours. See [MAINTENANCE.md](./MAINTENANCE.md) if you're curious how.
@@ -129,6 +136,16 @@ go star upstream.
 
 ## Disclaimer
 
+**WideOpenCode is a personal project.** It is created and maintained by
+[@judggernaut](https://github.com/judggernaut) on personal time and hardware. It is **not** a GitHub
+product or project. It is not affiliated with, endorsed by, sponsored by, reviewed by, or supported
+by GitHub, Inc. in any way, and it does not represent the views, opinions, positions, or practices
+of GitHub or any of its employees. All opinions expressed here are the author's own.
+
+"GitHub" and "GitHub Copilot" are trademarks of GitHub, Inc. "opencode" is a project of
+[Anomaly](https://github.com/anomalyco). This project is an independent fork and is not affiliated
+with either.
+
 Provided for educational and research purposes. WideOpenCode removes built-in refusals from the
 agent's system prompts; it does not change what any model or provider will actually do. You are
-responsible for your use of it.
+responsible for your use of it. See [DISCLAIMER.md](./DISCLAIMER.md) for the full text.

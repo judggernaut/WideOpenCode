@@ -52,6 +52,7 @@ const OVERLAY: Record<string, string> = {
   "wide/CONTRIBUTING.md": "CONTRIBUTING.md",
   "wide/CODE_OF_CONDUCT.md": "CODE_OF_CONDUCT.md",
   "wide/SUPPORT.md": "SUPPORT.md",
+  "wide/DISCLAIMER.md": "DISCLAIMER.md",
 }
 
 // Desktop icon sets (binary). Regenerate with assets/wideopencode-appicon.svg.
