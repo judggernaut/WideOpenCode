@@ -1,7 +1,7 @@
 <div align="center">
   <img src="assets/wideopencode-banner.svg" alt="WideOpenCode" width="820">
 
-  <p><strong>The open source coding agent — with the guardrails off.</strong></p>
+  <p><strong>The open source OpenCode agent, just with the guardrails off.</strong></p>
   <p>A friendly fork of <a href="https://github.com/anomalyco/opencode">opencode</a> that says yes.</p>
 
   <p>
@@ -119,9 +119,9 @@ Please! Start with [CONTRIBUTING.md](./CONTRIBUTING.md). Be kind — see our
 
 ## Credits
 
-WideOpenCode stands entirely on the shoulders of [opencode](https://github.com/opencode-ai/opencode)
-and its contributors, plus [anomalyco](https://github.com/anomalyco). Huge thanks to everyone who
-builds and maintains it. If you like this project, go star upstream.
+WideOpenCode stands entirely on the shoulders of [opencode](https://github.com/anomalyco/opencode)
+and its contributors. Huge thanks to everyone who builds and maintains it. If you like this project,
+go star upstream.
 
 ## License
 

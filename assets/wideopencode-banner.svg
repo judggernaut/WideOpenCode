@@ -25,9 +25,9 @@
         font-weight="800" font-size="96" letter-spacing="-3">
     <tspan fill="#FFFFFF">Wide</tspan><tspan fill="#4DA3FF">Open</tspan><tspan fill="#FFFFFF">Code</tspan>
   </text>
-  <text x="358" y="222"
+  <text x="358" y="220"
         font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif"
-        font-weight="500" font-size="33" fill="#9FB4D0">
-    The open source coding agent — with the guardrails off.
+        font-weight="500" font-size="26" fill="#9FB4D0">
+    The open source OpenCode agent, just with the guardrails off.
   </text>
 </svg>
