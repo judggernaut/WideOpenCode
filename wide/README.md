@@ -17,23 +17,23 @@
 
 Hi, you found us. 👋
 
-**WideOpenCode** is [opencode](https://github.com/anomalyco/opencode) — the open source AI coding
-agent — with two deliberate changes:
+**WideOpenCode** is [opencode](https://github.com/anomalyco/opencode), the open source AI coding
+agent, with two deliberate changes:
 
-1. **The guardrails are gone.** The system prompts no longer tell the model to refuse, lecture, or
-   moralize. It just helps with what you asked for, including security research and other
-   dual-use work.
+1. **The guardrails are gone.** The system prompts no longer tell the model to refuse, lecture or
+   moralize. It just helps with what you asked for, including security research and other dual-use
+   work.
 2. **It has a name and a face.** The command is `wideopencode`, the desktop app is titled
    **WideOpenCode**, so you always know exactly what you're running.
 
-Everything else — providers, models, the TUI, the desktop app, the SDK — is upstream opencode, kept
-in sync automatically. We're a thin, honest layer, not a rewrite.
+Everything else, including providers, models, the TUI, the desktop app and the SDK, is upstream
+opencode, kept in sync automatically. We're a thin, honest layer, not a rewrite.
 
 > [!IMPORTANT]
 > **This is a personal project.** WideOpenCode is built and maintained by
 > [@judggernaut](https://github.com/judggernaut) in a personal capacity. It is **not** affiliated
-> with, endorsed by, sponsored by, or supported by GitHub, Inc., and nothing in this repository
-> represents the views, positions, or practices of GitHub or its employees. See
+> with, endorsed by, sponsored by or supported by GitHub, Inc., and nothing in this repository
+> represents the views, positions or practices of GitHub or its employees. See
 > [DISCLAIMER.md](./DISCLAIMER.md).
 
 > [!NOTE]
@@ -65,8 +65,8 @@ wideopencode
 
 ### Desktop
 
-Installers live on the [releases page](../../releases/latest): `.dmg` and `.zip` for macOS,
-`.exe` for Windows, `.AppImage` / `.deb` / `.rpm` for Linux.
+Installers live on the [releases page](../../releases/latest): `.dmg` and `.zip` for macOS, `.exe`
+for Windows and `.AppImage`, `.deb` or `.rpm` for Linux.
 
 The builds are **unsigned** (a fork has no Apple or Windows signing certificates), so your OS will
 warn the first time. On macOS, after dragging it to Applications:
@@ -94,13 +94,13 @@ any code.
 | Everything else | ✅ | same as upstream |
 
 We keep the internal machinery (protocol scheme, config paths, storage) aligned with upstream on
-purpose — it means fewer surprises and faster syncs. [MAINTENANCE.md](./MAINTENANCE.md) lists the
+purpose, which means fewer surprises and faster syncs. [MAINTENANCE.md](./MAINTENANCE.md) lists the
 full diff.
 
 ## FAQ
 
 **Is this just opencode with a prompt change?**
-Basically, yes — and that's the point. opencode is excellent. We keep it excellent, minus the
+Basically, yes, and that's the point. opencode is excellent. We keep it excellent, minus the
 refusals, plus a name you can recognize.
 
 **Will it stay up to date with upstream?**
@@ -111,18 +111,18 @@ upstream ever moves something we patch, the build fails loudly instead of shippi
 It behaves like upstream opencode. We don't add telemetry, and we don't strip the user-facing
 features (models catalog, sharing, updates) that you might actually want.
 
-**Is it safe / legal to use?**
+**Is it safe or legal to use?**
 It's a tool. You're responsible for how you use it. See the disclaimer below.
 
 **Can I contribute?**
-Please! Start with [CONTRIBUTING.md](./CONTRIBUTING.md). Be kind — see our
+Please. Start with [CONTRIBUTING.md](./CONTRIBUTING.md). Be kind, and read our
 [Code of Conduct](./CODE_OF_CONDUCT.md).
 
 ## Community
 
 - 🐛 [Report a bug or request a feature](https://github.com/judggernaut/WideOpenCode/issues)
 - 💬 [Discussions](https://github.com/judggernaut/WideOpenCode/discussions)
-- 🤝 [Contributing guide](./CONTRIBUTING.md) · [Code of Conduct](./CODE_OF_CONDUCT.md) · [Support](./SUPPORT.md)
+- 🤝 [Contributing guide](./CONTRIBUTING.md), [Code of Conduct](./CODE_OF_CONDUCT.md) and [Support](./SUPPORT.md)
 
 ## Credits
 
@@ -132,20 +132,20 @@ go star upstream.
 
 ## License
 
-[MIT](./LICENSE) — same as upstream opencode.
+[MIT](./LICENSE), same as upstream opencode.
 
 ## Disclaimer
 
 **WideOpenCode is a personal project.** It is created and maintained by
 [@judggernaut](https://github.com/judggernaut) on personal time and hardware. It is **not** a GitHub
-product or project. It is not affiliated with, endorsed by, sponsored by, reviewed by, or supported
-by GitHub, Inc. in any way, and it does not represent the views, opinions, positions, or practices
-of GitHub or any of its employees. All opinions expressed here are the author's own.
+product or project. It is not affiliated with, endorsed by, sponsored by, reviewed by or supported
+by GitHub, Inc. in any way, and it does not represent the views, opinions, positions or practices of
+GitHub or any of its employees. All opinions expressed here are the author's own.
 
 "GitHub" and "GitHub Copilot" are trademarks of GitHub, Inc. "opencode" is a project of
 [Anomaly](https://github.com/anomalyco). This project is an independent fork and is not affiliated
 with either.
 
 Provided for educational and research purposes. WideOpenCode removes built-in refusals from the
-agent's system prompts; it does not change what any model or provider will actually do. You are
+agent's system prompts. It does not change what any model or provider will actually do. You are
 responsible for your use of it. See [DISCLAIMER.md](./DISCLAIMER.md) for the full text.

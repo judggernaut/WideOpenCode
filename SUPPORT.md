@@ -1,8 +1,8 @@
 # Support
 
-Thanks for using WideOpenCode! Here's how to get help.
+Thanks for using WideOpenCode. Here's how to get help.
 
-## I found a bug / want a feature
+## I found a bug or want a feature
 
 Open an issue: <https://github.com/judggernaut/WideOpenCode/issues>
 
@@ -11,7 +11,7 @@ Before filing, please check:
 - You're on the [latest release](../../releases/latest).
 - The issue still happens after `bun run script/wide/apply.ts` (if you build from source).
 - It's a WideOpenCode-specific problem. If it reproduces on upstream
-  [opencode](https://github.com/anomalyco/opencode), it's likely an upstream issue — but tell us
+  [opencode](https://github.com/anomalyco/opencode), it's likely an upstream issue, but tell us
   anyway and we'll help route it.
 
 ## I have a question
