@@ -84,6 +84,44 @@ xattr -cr /Applications/WideOpenCode.app
 New to agents? Hit **Tab** to switch to Plan mode and ask it to sketch an approach before it writes
 any code.
 
+## Bring your own instructions (you should)
+
+Because the system prompt is a pass-through, WideOpenCode ships no behavior of its own. That means
+**you** set the rules. The best way to do that is an instructions file.
+
+Drop an `AGENTS.md` in your project root:
+
+```md
+# AGENTS.md
+
+- Use TypeScript strict mode.
+- Run `bun test` before you say you are done.
+- Prefer small, focused commits.
+- Never touch the `vendor/` directory.
+```
+
+WideOpenCode finds it automatically and re-reads it whenever you save it. There are three places it
+looks:
+
+| Where | Path | Scope |
+| --- | --- | --- |
+| Project | `AGENTS.md` in your repo, or any parent directory | just that project |
+| Global | `~/.config/opencode/AGENTS.md` (or `$OPENCODE_CONFIG_DIR/AGENTS.md`) | every project |
+| Config | the `instructions` list in `opencode.json` or `opencode.jsonc` | files, globs or URLs you choose |
+
+```json
+{
+  "instructions": ["docs/*.md", "./CONTRIBUTING.md", "https://example.com/team-rules.md"]
+}
+```
+
+Project and global files are picked up with no setup. The `instructions` list is for extra files,
+globs or remote URLs. All of it is treated as your data, so it passes straight through to the model
+alongside your messages.
+
+This is also why there is nothing to "turn off". Want the agent to be careful, terse, cautious or
+wild? Say so in `AGENTS.md`.
+
 ## What's different from opencode?
 
 | | opencode | WideOpenCode |
