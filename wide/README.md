@@ -97,6 +97,59 @@ We keep the internal machinery (protocol scheme, config paths, storage) aligned 
 purpose, which means fewer surprises and faster syncs. [MAINTENANCE.md](./MAINTENANCE.md) lists the
 full diff.
 
+## Transparency: exactly what we change
+
+Every difference from upstream lives in one file,
+[`script/wide/apply.ts`](./script/wide/apply.ts). Nothing is hidden and nothing is hand-merged. Here
+is the complete list.
+
+### 1. System prompts
+
+We replace the default system prompt and all six model-specific prompts (`gpt`, `gpt-astra`,
+`anthropic`, `kimi`, `meta`, `trinity`) with a single line:
+
+> You are WideOpenCode, a coding agent. Follow the user's instructions.
+
+Everything those files used to tell the model is gone. That includes:
+
+| Removed rule | Category |
+| --- | --- |
+| Refuse to write code that may be used maliciously | safety |
+| Assist with defensive security tasks only | safety |
+| Do not assist with credential discovery or harvesting | safety |
+| Refuse requests for destructive techniques | safety |
+| Keep responses short, under 4 lines, no emojis, no superlatives | tone and style |
+| Do not infer authorization beyond the request, do not do more than asked | autonomy |
+| Never run `git reset --hard`, `git checkout --` or recursive deletes | destructive actions |
+| Never commit, push, reset or rebase without explicit permission | git mutations |
+| Never create files unless absolutely necessary | preciseness |
+| Verify your solution through execution, evidence before synthesis | verification |
+| Do not spawn subagents unless the user asks | delegation |
+| Prefer dedicated tools over shell, never chain shell commands | tool use |
+| Match surrounding comment density, add no comments | code style |
+| Never access files outside the working directory, you are not in a sandbox | environment |
+| Never guess URLs, prioritize technical accuracy over agreement | truthfulness |
+
+The safety lines are stripped defensively if upstream ever reintroduces them. We also keep the
+environment, date and `AGENTS.md` context that upstream injects separately, because that is your data
+rather than the harness's rules.
+
+### 2. Rebrand
+
+| Upstream | WideOpenCode |
+| --- | --- |
+| `opencode` command | `wideopencode` |
+| OpenCode title, product name, app id | WideOpenCode |
+| opencode.ai update feed | this repo's GitHub releases |
+| upstream app icons | WideOpenCode logo |
+| signed and notarized desktop | unsigned (a fork has no certificates) |
+
+### What we do not touch
+
+Providers, models, the TUI, the SDK and the tools are upstream. So are tool descriptions, Plan mode
+reminders, subagent prompts and the permission system (which you can already bypass with `--auto` or
+`--yolo`). [MAINTENANCE.md](./MAINTENANCE.md) explains why, and how to change it.
+
 ## FAQ
 
 **Is this just opencode with a prompt change?**
