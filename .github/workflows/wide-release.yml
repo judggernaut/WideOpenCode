@@ -97,6 +97,9 @@ jobs:
             install_flags: ""
     runs-on: ${{ matrix.host }}
     timeout-minutes: 90
+    env:
+      # Real Developer ID signing + notarization when the Apple certificate secret exists.
+      WIDE_SIGN_MAC: ${{ secrets.APPLE_CERTIFICATE && '1' || '' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -112,6 +115,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
+
+      - name: Import Apple signing certificate
+        if: ${{ runner.os == 'macOS' && secrets.APPLE_CERTIFICATE != '' }}
+        uses: apple-actions/import-codesign-certs@v2
+        with:
+          keychain: build
+          p12-file-base64: ${{ secrets.APPLE_CERTIFICATE }}
+          p12-password: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+
+      - name: Write notarization API key
+        if: ${{ runner.os == 'macOS' && secrets.APPLE_API_KEY_P8 != '' }}
+        run: printf '%s' "${{ secrets.APPLE_API_KEY_P8 }}" > "$RUNNER_TEMP/apple-api-key.p8"
 
       - name: Install dependencies
         run: bun install ${{ matrix.install_flags }}
@@ -145,7 +160,11 @@ jobs:
         env:
           OPENCODE_CHANNEL: prod
           OPENCODE_CLI_TARGET: ${{ matrix.target }}
-          CSC_IDENTITY_AUTO_DISCOVERY: "false"
+          CSC_IDENTITY_AUTO_DISCOVERY: ${{ secrets.APPLE_CERTIFICATE && 'true' || 'false' }}
+          CSC_KEYCHAIN: ${{ secrets.APPLE_CERTIFICATE && 'build' || '' }}
+          APPLE_API_KEY: ${{ runner.temp }}/apple-api-key.p8
+          APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
+          APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
 
       - uses: actions/upload-artifact@v4
         with:

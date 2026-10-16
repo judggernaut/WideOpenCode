@@ -117,6 +117,27 @@ gh workflow run wide-release.yml -f version=2.0.30 -f tag=v2.0.30-wide
 
 The desktop auto-updater is configured to read this repo's GitHub releases.
 
+### Optional: signed and notarized macOS builds
+
+By default macOS builds are ad-hoc signed, so users must run `xattr -cr` once. If you have an Apple
+Developer account, add these repository secrets and the release workflow will sign with your
+Developer ID and notarize automatically (no `xattr` needed):
+
+| Secret | What it is |
+| --- | --- |
+| `APPLE_CERTIFICATE` | base64 of your Developer ID Application `.p12` (`base64 -i cert.p12 \| pbcopy`) |
+| `APPLE_CERTIFICATE_PASSWORD` | the `.p12` password |
+| `APPLE_API_KEY_P8` | contents of your App Store Connect API key (`.p8`) |
+| `APPLE_API_KEY_ID` | the API key ID |
+| `APPLE_API_ISSUER` | the API issuer ID |
+
+When `APPLE_CERTIFICATE` is present, the workflow sets `WIDE_SIGN_MAC=1`, imports the certificate,
+and passes the notarization key to electron-builder. The config in `electron-builder.config.ts`
+reads `WIDE_SIGN_MAC` to decide between real signing (and `notarize: true`) and the ad-hoc fallback.
+Without the secret, nothing changes and the ad-hoc build is produced.
+
+Windows signing is separate: it is skipped unless the `AZURE_TRUSTED_SIGNING_*` secrets are set.
+
 ## Known differences from upstream (and why)
 
 | Area | Choice | Reason |

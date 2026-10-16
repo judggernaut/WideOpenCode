@@ -329,9 +329,9 @@ const EDITS: Edit[] = [
     replace: `  if (process.platform === "win32" && process.env.GITHUB_ACTIONS === "true" && process.env.AZURE_TRUSTED_SIGNING_ENDPOINT) {`,
   },
 
-  // ----- Desktop: build without upstream signing/notarization credentials -----
-  // The signing hook is disabled when no certificate is present. Ad-hoc signing
-  // happens in afterPack instead: signing mid-build produced an invalid signature
+  // ----- Desktop: signing. Real signing/notarization when WIDE_SIGN_MAC is set
+  // (CI sets it when an Apple certificate secret exists); otherwise ad-hoc sign the
+  // finished app in afterPack. Signing mid-build produced an invalid signature
   // ("code has no resources but signature indicates they must be present"), which
   // macOS reports as a damaged app.
   {
@@ -342,11 +342,11 @@ const EDITS: Edit[] = [
       },
       notarize: true,`,
     replace: `      sign: async (options) => {
-        if (!process.env.CSC_LINK && !process.env.CSC_NAME) return
+        if (!process.env.WIDE_SIGN_MAC) return
         const { sign } = await import("app-builder-lib/out/codeSign/macCodeSign")
         await sign(macSignOptions(options))
       },
-      notarize: false,`,
+      notarize: Boolean(process.env.WIDE_SIGN_MAC),`,
   },
   {
     file: "packages/desktop/electron-builder.config.ts",
@@ -355,9 +355,9 @@ const EDITS: Edit[] = [
       if (context.electronPlatformName !== "win32") return`,
     replace: `      if ((await stat(version)).size === 0) throw new Error(\`Bundled CLI version must be a non-empty file: \${version}\`)
 
-      // A fork has no Apple certificate, so ad-hoc sign the finished app here, after packing and
-      // before the dmg/zip are built. Doing it in the signing hook produced an invalid signature.
-      if (context.electronPlatformName === "darwin" && !process.env.CSC_LINK && !process.env.CSC_NAME) {
+      // No Apple certificate (WIDE_SIGN_MAC unset): ad-hoc sign the finished app here, after
+      // packing and before the dmg/zip are built. With a certificate, electron-builder signs.
+      if (context.electronPlatformName === "darwin" && !process.env.WIDE_SIGN_MAC) {
         const { execFileSync } = await import("node:child_process")
         const app = path.join(context.appOutDir, \`\${context.packager.appInfo.productFilename}.app\`)
         execFileSync("codesign", ["--force", "--deep", "--sign", "-", app])
