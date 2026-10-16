@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" role="img" aria-label="WideOpenCode">
+  <defs>
+    <linearGradient id="woc-bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6FB6FF"/>
+      <stop offset="0.55" stop-color="#1E7BFF"/>
+      <stop offset="1" stop-color="#0B49D6"/>
+    </linearGradient>
+    <linearGradient id="woc-beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8FC4FF" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#8FC4FF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <polygon points="158,432 206,432 268,492 158,492" fill="url(#woc-beam)"/>
+  <polygon points="354,432 306,432 244,492 354,492" fill="url(#woc-beam)"/>
+
+  <polygon points="172,80 40,256 172,432 172,352 114,256 172,160" fill="#0E1B2E"/>
+  <polygon points="340,80 472,256 340,432 340,352 398,256 340,160" fill="#0E1B2E"/>
+
+  <rect x="180" y="118" width="66" height="276" rx="33" fill="url(#woc-bar)"/>
+  <rect x="266" y="118" width="66" height="276" rx="33" fill="url(#woc-bar)"/>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 340" fill="none" role="img" aria-label="WideOpenCode">
+  <defs>
+    <linearGradient id="b-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0B1524"/>
+      <stop offset="1" stop-color="#152A49"/>
+    </linearGradient>
+    <linearGradient id="b-bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8CC4FF"/>
+      <stop offset="0.55" stop-color="#2E8BFF"/>
+      <stop offset="1" stop-color="#0B49D6"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1280" height="340" rx="28" fill="url(#b-bg)"/>
+
+  <g transform="translate(70,40) scale(0.52)">
+    <polygon points="172,80 40,256 172,432 172,352 114,256 172,160" fill="#FFFFFF"/>
+    <polygon points="340,80 472,256 340,432 340,352 398,256 340,160" fill="#FFFFFF"/>
+    <rect x="180" y="118" width="66" height="276" rx="33" fill="url(#b-bar)"/>
+    <rect x="266" y="118" width="66" height="276" rx="33" fill="url(#b-bar)"/>
+  </g>
+
+  <text x="356" y="168"
+        font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif"
+        font-weight="800" font-size="96" letter-spacing="-3">
+    <tspan fill="#FFFFFF">Wide</tspan><tspan fill="#4DA3FF">Open</tspan><tspan fill="#FFFFFF">Code</tspan>
+  </text>
+  <text x="358" y="222"
+        font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif"
+        font-weight="500" font-size="33" fill="#9FB4D0">
+    The open source coding agent — with the guardrails off.
+  </text>
+</svg>

@@ -49,6 +49,26 @@ type Edit = { file: string; find: string; replace: string }
 // Full-file replacements (we own these files entirely).
 const OVERLAY: Record<string, string> = {
   "wide/README.md": "README.md",
+  "wide/CONTRIBUTING.md": "CONTRIBUTING.md",
+  "wide/CODE_OF_CONDUCT.md": "CODE_OF_CONDUCT.md",
+  "wide/SUPPORT.md": "SUPPORT.md",
+}
+
+// Desktop icon sets (binary). Regenerate with assets/wideopencode-appicon.svg.
+const ICON_FILES = [
+  "32x32.png",
+  "64x64.png",
+  "128x128.png",
+  "128x128@2x.png",
+  "dock.png",
+  "icon.png",
+  "icon.icns",
+  "icon.ico",
+]
+for (const channel of ["dev", "beta", "prod"]) {
+  for (const file of ICON_FILES) {
+    OVERLAY[`wide/icons/${channel}/${file}`] = `packages/desktop/icons/${channel}/${file}`
+  }
 }
 
 // Targeted, line-level edits to upstream-owned files. Keep each `find` string
@@ -358,11 +378,12 @@ async function patch(edit: Edit): Promise<boolean> {
 }
 
 async function copyOverlay(from: string, to: string): Promise<boolean> {
-  const source = await readFile(path.join(root, from), "utf8")
-  const dest = path.join(root, to)
-  const existing = await readFile(dest, "utf8").catch(() => "")
-  if (existing === source) return false
-  await writeFile(dest, source)
+  const source = new Uint8Array(await Bun.file(path.join(root, from)).arrayBuffer())
+  const destPath = path.join(root, to)
+  const existing = new Uint8Array(await Bun.file(destPath).arrayBuffer().catch(() => new ArrayBuffer(0)))
+  const same = source.length === existing.length && source.every((byte, index) => byte === existing[index])
+  if (same) return false
+  await Bun.write(destPath, source)
   return true
 }
 

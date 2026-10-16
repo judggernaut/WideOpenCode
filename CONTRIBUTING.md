@@ -1,112 +1,63 @@
-# Contributing to OpenCode
+# Contributing to WideOpenCode
 
-The changes most likely to be accepted are:
+First off — thank you. People like you make open source worth doing. 💙
 
-- Bug fixes
-- Additional LSPs and formatters
-- LLM performance improvements
-- Environment-specific fixes
-- Missing standard behavior
-- Documentation improvements
+WideOpenCode is a **fork of [opencode](https://github.com/anomalyco/opencode)**. That shapes how
+contributions work here, so please skim this page before opening a PR.
 
-UI and core product features require design review before implementation. If you are unsure whether a change fits, ask a maintainer or choose an issue labeled [`help wanted`](https://github.com/anomalyco/opencode/issues?q=is%3Aissue%20state%3Aopen%20label%3Ahelp-wanted), [`good first issue`](https://github.com/anomalyco/opencode/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22good%20first%20issue%22), [`bug`](https://github.com/anomalyco/opencode/issues?q=is%3Aissue%20state%3Aopen%20label%3Abug), or [`perf`](https://github.com/anomalyco/opencode/issues?q=is%3Aopen%20is%3Aissue%20label%3A%22perf%22).
+## The one rule that matters
 
-Want to take on an issue? Leave a comment and a maintainer may assign it unless it is already being worked on.
+Every change we make on top of upstream lives in **one place**: [`script/wide/apply.ts`](./script/wide/apply.ts).
 
-> [!NOTE]
-> PRs that ignore these guardrails will likely be closed.
+If your change is a *WideOpenCode customization* (a rebrand, a prompt tweak, a new default), add it
+there — not by editing the upstream file directly — so our sync workflow keeps it applied forever.
+See [MAINTENANCE.md](./MAINTENANCE.md) for the full model.
 
-## Adding Providers
+If your change is a *bug fix or feature that belongs in opencode itself*, please consider sending it
+upstream too. We'd rather carry as little as possible.
 
-New providers should rarely require OpenCode changes. Add the provider to [models.dev](https://github.com/anomalyco/models.dev) first.
+## Getting set up
 
-## Development
-
-OpenCode requires Bun 1.3 or newer. From the repository root:
-
-```bash
+```sh
 bun install
-bun dev [directory]
+bun run dev            # run the TUI from source
 ```
 
-`bun dev` runs the V2 CLI and TUI. Pass a directory to open another project, or `.` to open this repository.
+Build the CLI:
 
-To test a development TUI against your installed OpenCode V2 background service and live sessions:
-
-```bash
-bun run dev:live [directory]
+```sh
+bun run ./packages/cli/script/build.ts --single --skip-web-ui
 ```
 
-For web development, run the backend and app in separate terminals. Other interfaces have root scripts:
+## Before you open a PR
 
-```bash
-bun dev serve --port 4096
-bun run dev:web
-bun run dev:desktop
-bun run dev:www
+```sh
+bun run check                              # lint + typecheck (must pass)
+bun run script/wide/apply.ts               # if you touched apply.ts or overlays
+bun run script/wide/verify.ts              # must pass
 ```
 
-### Packages
+- Keep PRs **small and focused**. One idea per PR.
+- Use conventional commit-style titles: `feat(cli): ...`, `fix(desktop): ...`, `docs: ...`.
+- Branch names: short, hyphenated, no `feat/` prefixes (e.g. `wider-logo`).
+- Be kind in reviews. Assume good intent.
 
-- `packages/schema`: shared wire and storage contracts
-- `packages/core`: domain behavior and persistence
-- `packages/protocol`: public API definitions
-- `packages/server`: HTTP server and runtime composition
-- `packages/client`: generated TypeScript clients
-- `packages/cli`: command-line entrypoint and service lifecycle
-- `packages/tui`: terminal interface
-- `packages/app`: shared web interface
-- `packages/desktop`: Electron desktop application
-- `packages/plugin`: plugin API
+## Adding a customization
 
-### Verification
+1. Add a `find`/`replace` pair (or a whole-file overlay) to `script/wide/apply.ts`.
+2. Run `bun run script/wide/apply.ts` and `bun run script/wide/verify.ts`.
+3. Commit both the change and the script update.
 
-Run typechecks, and tests where defined, from the affected package rather than the repository root:
+## Reporting bugs & security
 
-```bash
-cd packages/core
-bun run test
-bun typecheck
-```
+- Bugs and features → [open an issue](https://github.com/judggernaut/WideOpenCode/issues).
+- Security → [SECURITY.md](./SECURITY.md) (please, not a public issue).
 
-Follow package-specific instructions in nearby `AGENTS.md` files. After changing the public Protocol or Server `HttpApi`, run `bun run generate` from `packages/client`; never edit generated client files directly.
+## Code of Conduct
 
-Follow the repository [style guide](./AGENTS.md).
+By participating, you agree to our [Code of Conduct](./CODE_OF_CONDUCT.md). Be excellent to each
+other.
 
-## Pull Requests
+## License
 
-### Link Issues When Required
-
-Bug fixes, chores, and tests must reference an existing issue. Documentation, refactor, and feature PRs are exempt from the automated linked-issue check. When required, use `Fixes #123` or `Closes #123` in the PR description.
-
-Before implementing new functionality, open a feature request describing the problem, why it belongs in OpenCode, and your proposed approach if you have one. Wait for design approval before opening the implementation PR.
-
-Base branches on `dev` and complete the provided pull request template.
-
-### Keep It Focused
-
-- Keep PRs small and focused.
-- Explain the problem and why the change fixes it.
-- Check whether the functionality already exists.
-- For UI changes, include before-and-after screenshots or video.
-- For logic changes, explain what you tested and how a reviewer can verify it.
-
-### Keep It Brief
-
-Long, AI-generated PR descriptions and issues may be ignored. Write a short explanation in your own words. If the change cannot be explained briefly, the PR may be too large.
-
-### Use Conventional Titles
-
-Use `type(scope): summary`. Supported types are `feat`, `fix`, `docs`, `chore`, `refactor`, and `test`. The scope is optional.
-
-Examples:
-
-- `docs: update contributing guide`
-- `fix(tui): restore scroll position`
-- `feat(app): add workspace search`
-
-## Issues
-
-Bug reports and feature requests must use their issue templates. Blank issues are not allowed; ask support and how-to questions in the [Discord community](https://discord.gg/opencode).
-
-Automated checks flag missing templates, placeholder text, AI-generated walls of text, and missing meaningful content. You have two hours to correct a flagged issue before it closes automatically. Ask a maintainer if an issue was flagged incorrectly.
+By contributing, you agree your contributions are licensed under the [MIT License](./LICENSE).

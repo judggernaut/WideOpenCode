@@ -16,9 +16,10 @@ const root = path.resolve(import.meta.dir, "../..")
 const failures: string[] = []
 
 for (const [from, to] of Object.entries(OVERLAY)) {
-  const source = await readFile(path.join(root, from), "utf8")
-  const dest = await readFile(path.join(root, to), "utf8").catch(() => "")
-  if (source !== dest) failures.push(`overlay not applied: ${to}`)
+  const source = new Uint8Array(await Bun.file(path.join(root, from)).arrayBuffer())
+  const dest = new Uint8Array(await Bun.file(path.join(root, to)).arrayBuffer().catch(() => new ArrayBuffer(0)))
+  const same = source.length === dest.length && source.every((byte, index) => byte === dest[index])
+  if (!same) failures.push(`overlay not applied: ${to}`)
 }
 
 for (const rel of PROMPT_FILES) {
