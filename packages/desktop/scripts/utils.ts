@@ -111,7 +111,7 @@ export async function copyBuiltCliToResources(root: string, dest = windowsify("r
 // 200 MB binary on first launch.
 async function copyCliToResources(pkg: string, dest: string) {
   const cli = getCurrentCli()
-  await copyFile(join(pkg, "bin", cli.os === "win32" ? "opencode.exe" : "opencode"), dest)
+  await copyFile(join(pkg, "bin", cli.os === "win32" ? "wideopencode.exe" : "wideopencode"), dest)
   await prepareCli(dest)
 
   const manifest = Option.getOrUndefined(
@@ -131,7 +131,7 @@ async function prepareCli(dest: string) {
 
   if (process.platform !== "win32") await chmod(dest, 0o755)
 
-  if (process.platform === "win32" && process.env.GITHUB_ACTIONS === "true") {
+  if (process.platform === "win32" && process.env.GITHUB_ACTIONS === "true" && process.env.AZURE_TRUSTED_SIGNING_ENDPOINT) {
     await $`pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File ../../script/sign-windows.ps1 ${dest}`
   }
 

@@ -1,0 +1,63 @@
+name: wide-sync
+
+# Keeps WideOpenCode current with upstream opencode.
+#
+# 1. Merges upstream/dev into main (preferring upstream on any conflict).
+# 2. Re-runs the WideOpenCode overlay, which reasserts every divergence
+#    (command name, desktop branding, guardrail removal).
+# 3. Fails closed if the overlay cannot be applied or a guardrail reappears.
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wide-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+
+      - name: Configure git
+        run: |
+          git config user.name "wideopencode-bot"
+          git config user.email "wideopencode-bot@users.noreply.github.com"
+
+      - name: Fetch upstream
+        run: |
+          git remote add upstream https://github.com/anomalyco/opencode.git 2>/dev/null || \
+            git remote set-url upstream https://github.com/anomalyco/opencode.git
+          git fetch upstream dev --tags --force
+
+      - name: Merge upstream (prefer upstream on conflict)
+        run: git merge --no-commit --no-edit -X theirs upstream/dev || true
+
+      - name: Apply WideOpenCode overlay
+        run: bun run script/wide/apply.ts
+
+      - name: Verify overlay
+        run: bun run script/wide/verify.ts
+
+      - name: Commit and push
+        run: |
+          if [[ -z "$(git status --porcelain)" ]]; then
+            echo "Nothing to sync."
+            exit 0
+          fi
+          git add -A
+          git commit -m "chore: sync upstream opencode $(git rev-parse --short upstream/dev)"
+          git push origin HEAD:main

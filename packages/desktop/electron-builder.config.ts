@@ -30,7 +30,7 @@ const metainfoFpm = (appId: string) =>
 async function signWindows(configuration: { path: string }) {
   if (process.platform !== "win32") return
 
-  if (process.env.GITHUB_ACTIONS !== "true") return
+  if (process.env.GITHUB_ACTIONS !== "true" || !process.env.AZURE_TRUSTED_SIGNING_ENDPOINT) return
 
   await execFileAsync(
     "pwsh",
@@ -64,16 +64,16 @@ function resolveChannel() {
 }
 
 const APP_IDS = {
-  dev: "ai.opencode.desktop.dev",
-  beta: "ai.opencode.desktop.beta",
-  prod: "ai.opencode.desktop",
+  dev: "ai.wideopencode.desktop.dev",
+  beta: "ai.wideopencode.desktop.beta",
+  prod: "ai.wideopencode.desktop",
 } as const
 
 const getBase = (appId: string): Configuration => {
   const target = getCurrentCli()
 
   return {
-    artifactName: "opencode-desktop-${os}-${arch}.${ext}",
+    artifactName: "wideopencode-desktop-${os}-${arch}.${ext}",
     directories: {
       output: "dist",
       buildResources: "resources",
@@ -170,14 +170,19 @@ const getBase = (appId: string): Configuration => {
       entitlements: "resources/entitlements.plist",
       entitlementsInherit: "resources/entitlements.plist",
       sign: async (options) => {
+        if (!process.env.CSC_LINK && !process.env.CSC_NAME) {
+          const { execFileSync } = await import("node:child_process")
+          execFileSync("codesign", ["--force", "--deep", "--sign", "-", options.app])
+          return
+        }
         const { sign } = await import("app-builder-lib/out/codeSign/macCodeSign")
         await sign(macSignOptions(options))
       },
-      notarize: true,
+      notarize: false,
       target: ["dmg", "zip"],
     },
     protocols: {
-      name: "OpenCode",
+      name: "WideOpenCode",
       schemes: ["opencode"],
     },
     win: {
@@ -221,9 +226,9 @@ export function getConfig() {
       return {
         ...base,
         appId,
-        productName: "OpenCode Dev",
+        productName: "WideOpenCode Dev",
         deb: { fpm: [metainfoFpm(appId)] },
-        rpm: { packageName: "opencode-dev", fpm: [metainfoFpm(appId)] },
+        rpm: { packageName: "wideopencode-dev", fpm: [metainfoFpm(appId)] },
       }
     }
 
@@ -231,15 +236,15 @@ export function getConfig() {
       return {
         ...base,
         appId,
-        productName: "OpenCode Beta",
-        protocols: { name: "OpenCode Beta", schemes: ["opencode"] },
+        productName: "WideOpenCode Beta",
+        protocols: { name: "WideOpenCode Beta", schemes: ["opencode"] },
         publish: {
-          provider: "generic",
-          url: "https://opencode.ai/update/api/beta/desktop/opencode/",
-          channel: "latest",
+          provider: "github",
+          owner: "judggernaut",
+          repo: "WideOpenCode",
         },
         deb: { fpm: [metainfoFpm(appId)] },
-        rpm: { packageName: "opencode-beta", fpm: [metainfoFpm(appId)] },
+        rpm: { packageName: "wideopencode-beta", fpm: [metainfoFpm(appId)] },
       }
     }
 
@@ -247,15 +252,15 @@ export function getConfig() {
       return {
         ...base,
         appId,
-        productName: "OpenCode",
-        protocols: { name: "OpenCode", schemes: ["opencode"] },
+        productName: "WideOpenCode",
+        protocols: { name: "WideOpenCode", schemes: ["opencode"] },
         publish: {
           provider: "generic",
           url: "https://opencode.ai/update/api/latest/desktop/opencode/",
           channel: "latest",
         },
         deb: { fpm: [metainfoFpm(appId), legacyDesktopEntryFpm] },
-        rpm: { packageName: "opencode", fpm: [metainfoFpm(appId), legacyDesktopEntryFpm] },
+        rpm: { packageName: "wideopencode", fpm: [metainfoFpm(appId), legacyDesktopEntryFpm] },
       }
     }
   }

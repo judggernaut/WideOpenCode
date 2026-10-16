@@ -1,0 +1,169 @@
+name: wide-release
+
+# Builds WideOpenCode CLI binaries and unsigned desktop installers and attaches
+# them to a GitHub release. The desktop auto-updater points at this repo's
+# releases (configured in packages/desktop/electron-builder.config.ts).
+#
+# Desktop artifacts are unsigned: macOS builds are ad-hoc signed (users must run
+# `xattr -cr /Applications/WideOpenCode.app` after install) and Windows builds
+# are unsigned (SmartScreen will warn).
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to build (e.g. 2.0.30)"
+        required: true
+      tag:
+        description: "Release tag (e.g. v2.0.30-wide)"
+        required: true
+      prerelease:
+        description: "Mark as pre-release"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  cli:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build CLI (all targets)
+        run: bun run ./packages/cli/script/build.ts
+        env:
+          OPENCODE_VERSION: ${{ inputs.version }}
+
+      - name: Collect release assets
+        run: |
+          mkdir -p release
+          cp packages/cli/dist/cli-darwin-arm64/bin/wideopencode          release/wideopencode-darwin-arm64
+          cp packages/cli/dist/cli-darwin-x64/bin/wideopencode            release/wideopencode-darwin-x64
+          cp packages/cli/dist/cli-linux-arm64/bin/wideopencode           release/wideopencode-linux-arm64
+          cp packages/cli/dist/cli-linux-x64/bin/wideopencode             release/wideopencode-linux-x64
+          cp packages/cli/dist/cli-windows-arm64/bin/wideopencode.exe     release/wideopencode-windows-arm64.exe
+          cp packages/cli/dist/cli-windows-x64/bin/wideopencode.exe       release/wideopencode-windows-x64.exe
+          chmod +x release/wideopencode-darwin-* release/wideopencode-linux-*
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cli-dist
+          path: packages/cli/dist
+          retention-days: 3
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cli-release
+          path: release
+          retention-days: 3
+
+  desktop:
+    needs: cli
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - host: macos-14
+            target: aarch64-apple-darwin
+            platform_flag: --mac --arm64
+          - host: macos-13
+            target: x86_64-apple-darwin
+            platform_flag: --mac --x64
+          - host: windows-latest
+            target: x86_64-pc-windows-msvc
+            platform_flag: --win
+          - host: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            platform_flag: --linux
+    runs-on: ${{ matrix.host }}
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: cli-dist
+          path: packages/cli/dist
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Install rpm (linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends rpm
+
+      - name: Prepare
+        working-directory: packages/desktop
+        run: bun ./scripts/prepare.ts
+        env:
+          OPENCODE_VERSION: ${{ inputs.version }}
+          OPENCODE_CHANNEL: prod
+          OPENCODE_CLI_TARGET: ${{ matrix.target }}
+          OPENCODE_CLI_DIST: ${{ github.workspace }}/packages/cli/dist
+
+      - name: Build renderer + main
+        working-directory: packages/desktop
+        run: bun run build
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+          OPENCODE_VERSION: ${{ inputs.version }}
+          OPENCODE_CHANNEL: prod
+          OPENCODE_CLI_TARGET: ${{ matrix.target }}
+          OPENCODE_CLI_DIST: ${{ github.workspace }}/packages/cli/dist
+
+      - name: Package
+        working-directory: packages/desktop
+        run: npx electron-builder ${{ matrix.platform_flag }} --publish never --config electron-builder.config.ts
+        env:
+          OPENCODE_CHANNEL: prod
+          OPENCODE_CLI_TARGET: ${{ matrix.target }}
+          CSC_IDENTITY_AUTO_DISCOVERY: "false"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: desktop-${{ matrix.target }}
+          path: packages/desktop/dist/*
+          retention-days: 3
+
+  release:
+    needs: [cli, desktop]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Assemble release assets
+        run: |
+          mkdir -p release
+          cp artifacts/cli-release/* release/ 2>/dev/null || true
+          find artifacts -type f \( -name '*.dmg' -o -name '*.zip' -o -name '*.exe' -o -name '*.AppImage' -o -name '*.deb' -o -name '*.rpm' -o -name 'latest*.yml' \) -exec cp {} release/ \;
+          ls -la release
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ inputs.tag }}" release/* \
+            --repo "${{ github.repository }}" \
+            --title "WideOpenCode ${{ inputs.version }}" \
+            --notes "WideOpenCode ${{ inputs.version }} — based on upstream opencode. Guardrails removed, rebranded CLI and desktop." \
+            ${{ inputs.prerelease && '--prerelease' || '' }}
