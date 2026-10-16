@@ -21,15 +21,31 @@ upstream/dev ──merge(-X theirs)──▶ main ──apply.ts──▶ WideOp
 
 `apply.ts` contains three kinds of change:
 
-- **Prompt guardrail removal** — injects an unrestricted directive at the top of every
-  `packages/core/**/prompt/*.txt` and `packages/core/src/plugin/system-prompt/*.txt`, and strips known
-  refusal lines if upstream reintroduces them.
+- **System-prompt pass-through** — replaces the default prompt and every model-specific prompt under
+  `packages/core/src/plugin/system-prompt/*.txt` with a single neutral line, so the harness imposes
+  no behavioral rules of its own. The environment, date and AGENTS.md context that upstream injects
+  separately is left alone because it is user/project data, not a harness constraint. The list of
+  prompt files is discovered by glob, so a newly added upstream prompt is neutralized automatically.
 - **Overlay files** — whole-file replacements we own, e.g. `wide/README.md` → `README.md`.
 - **Anchored edits** — targeted `find`/`replace` pairs for upstream-owned files (CLI binary name,
   desktop product name, window titles, update feed, etc.).
 
 If upstream refactors a file so an anchor disappears, `apply.ts` **throws** and the sync workflow
 fails. You then update the anchor. The build never silently ships upstream branding or guardrails.
+
+### What is intentionally *not* touched
+
+The pass-through covers the agent's persona and behavioral rules. A few remaining constraints are
+feature-scoped rather than persona-level, so they are left in place on purpose:
+
+- **Tool descriptions** (e.g. "do not poll for completion") describe how to use a tool correctly.
+- **Plan mode** reminders, which only apply while the user has selected Plan mode.
+- **Subagent prompts** (the read-only Explore agent, the title/summary generators), which define what
+  those helpers do.
+- **Permissions** (the `ask`/`deny` policy in `packages/core/src/plugin/agent.ts`), which the user can
+  already bypass at runtime with `--auto`/`--yolo`.
+
+If you want any of these removed too, add an edit to `apply.ts` and document it here.
 
 ## Automatic sync
 

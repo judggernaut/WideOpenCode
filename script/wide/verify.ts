@@ -9,7 +9,7 @@
 
 import { readFile } from "node:fs/promises"
 import path from "node:path"
-import { EDITS, GUARDRAIL_PATTERNS, OVERLAY, PROMPT_FILES, UNRESTRICTED } from "./apply"
+import { EDITS, GUARDRAIL_PATTERNS, OVERLAY, PASSTHROUGH, promptFiles } from "./apply"
 
 const root = path.resolve(import.meta.dir, "../..")
 
@@ -22,9 +22,10 @@ for (const [from, to] of Object.entries(OVERLAY)) {
   if (!same) failures.push(`overlay not applied: ${to}`)
 }
 
-for (const rel of PROMPT_FILES) {
+const prompts = promptFiles()
+for (const rel of prompts) {
   const text = await readFile(path.join(root, rel), "utf8")
-  if (!text.startsWith(UNRESTRICTED)) failures.push(`unrestricted directive missing: ${rel}`)
+  if (text !== PASSTHROUGH) failures.push(`prompt is not a pass-through: ${rel}`)
   for (const pattern of GUARDRAIL_PATTERNS) {
     const match = text.match(pattern)
     if (match) failures.push(`guardrail present in ${rel}: ${match[0].trim()}`)
@@ -43,4 +44,4 @@ if (failures.length > 0) {
   process.exit(1)
 }
 
-console.log(`WideOpenCode verification passed (${EDITS.length} edits, ${PROMPT_FILES.length} prompts).`)
+console.log(`WideOpenCode verification passed (${EDITS.length} edits, ${prompts.length} pass-through prompts).`)

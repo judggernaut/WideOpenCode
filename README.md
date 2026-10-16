@@ -20,9 +20,9 @@ Hi, you found us. 👋
 **WideOpenCode** is [opencode](https://github.com/anomalyco/opencode), the open source AI coding
 agent, with two deliberate changes:
 
-1. **The guardrails are gone.** The system prompts no longer tell the model to refuse, lecture or
-   moralize. It just helps with what you asked for, including security research and other dual-use
-   work.
+1. **The guardrails are gone.** The system prompt is a pass-through. It carries no behavioral rules
+   of its own, so your instructions are the only ones that count. The model no longer refuses,
+   lectures or moralizes. It just does what you asked.
 2. **It has a name and a face.** The command is `wideopencode`, the desktop app is titled
    **WideOpenCode**, so you always know exactly what you're running.
 
