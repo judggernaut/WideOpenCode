@@ -83,7 +83,7 @@ jobs:
           - host: macos-14
             target: x86_64-apple-darwin
             platform_flag: --mac --x64
-            install_flags: --os=darwin --cpu=x64
+            install_flags: --cpu=*
           - host: windows-latest
             target: x86_64-pc-windows-msvc
             platform_flag: --win
