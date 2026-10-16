@@ -61,6 +61,31 @@ demand). It:
 Because step 3 re-derives every WideOpenCode change from scratch, a merge conflict on an
 overlay-owned file is harmless: whatever the merge produces, `apply.ts` overwrites it.
 
+## Why upstream prompt changes can never come back
+
+This is the question that matters most for the pass-through, so here is the chain of guarantees.
+
+1. **The merge cannot keep upstream's prompt.** The sync merges with `-X theirs`, so any conflict on a
+   prompt file resolves to upstream's version. That is intentional: we do not try to win the merge.
+2. **`apply.ts` overwrites every prompt file afterwards.** It replaces the default prompt and every
+   file matched by the glob `packages/core/src/plugin/system-prompt/*.txt` with the single
+   pass-through line. Upstream's content, whether merged or not, is discarded.
+3. **The glob covers new files.** If upstream adds a new model prompt, the glob finds it and
+   neutralizes it without any change to our script.
+4. **`verify.ts` fails closed.** It re-reads the whole prompt directories and fails if any `.txt` file
+   is not exactly the pass-through line, or if any guardrail pattern appears in any file. A release
+   cannot ship if this fails.
+5. **The release workflow re-runs `verify.ts` before building**, so even a hand-edited `main` cannot
+   publish a build with upstream prompts restored.
+
+So an upstream change to these files can land in the merge, but it is overwritten by `apply.ts` and,
+if that ever failed, the sync and the release both stop instead of shipping it.
+
+The one case this does not cover: a brand-new mechanism that injects behavioral text somewhere other
+than these prompt files (for example a new plugin that appends to `event.system`). Nothing can catch
+that automatically. If upstream adds one, add an edit to `apply.ts` and a check to `verify.ts`. The
+`Transparency` section of the README is the list to keep in sync with reality.
+
 ## Doing it locally
 
 ```sh

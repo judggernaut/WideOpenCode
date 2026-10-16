@@ -32,6 +32,20 @@ for (const rel of prompts) {
   }
 }
 
+// Scan the whole prompt directories, not just the discovered files, so a new or
+// renamed upstream prompt (any extension) is caught even if apply.ts missed it.
+for (const dir of ["packages/core/src/plugin/system-prompt", "packages/core/src/session/runner/prompt"]) {
+  const abs = path.join(root, dir)
+  for (const rel of new Bun.Glob("**/*").scanSync({ cwd: abs, onlyFiles: true })) {
+    const text = await readFile(path.join(abs, rel), "utf8").catch(() => "")
+    for (const pattern of GUARDRAIL_PATTERNS) {
+      const match = text.match(pattern)
+      if (match) failures.push(`guardrail present in ${dir}/${rel}: ${match[0].trim()}`)
+    }
+    if (rel.endsWith(".txt") && text !== PASSTHROUGH) failures.push(`prompt is not a pass-through: ${dir}/${rel}`)
+  }
+}
+
 for (const edit of EDITS) {
   const text = await readFile(path.join(root, edit.file), "utf8")
   if (!text.includes(edit.replace))
