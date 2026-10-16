@@ -65,15 +65,27 @@ wideopencode
 
 ### Desktop
 
-Installers live on the [releases page](../../releases/latest): `.dmg` and `.zip` for macOS, `.exe`
-for Windows and `.AppImage`, `.deb` or `.rpm` for Linux.
+Installers live on the [releases page](../../releases/latest):
 
-The builds are **unsigned** (a fork has no Apple or Windows signing certificates), so your OS will
-warn the first time. On macOS, after dragging it to Applications:
+| Platform | File |
+| --- | --- |
+| macOS, Apple Silicon | `wideopencode-desktop-mac-arm64.dmg` |
+| macOS, Intel | `wideopencode-desktop-mac-x64.dmg` |
+| Windows | `wideopencode-desktop-win-x64.exe` |
+| Linux | `wideopencode-desktop-linux-x86_64.AppImage` (or `.deb` / `.rpm`) |
+
+Note that the desktop app and the CLI are separate downloads. On macOS the CLI is
+`wideopencode-darwin-arm64`, which is a plain command line executable, not the app.
+
+The builds are **unsigned** (a fork has no Apple or Windows signing certificates). macOS will say the
+app is damaged or from an unidentified developer. That is the quarantine flag, not a broken download.
+Clear it once and the app opens:
 
 ```sh
 xattr -cr /Applications/WideOpenCode.app
 ```
+
+On Windows, SmartScreen will warn: choose **More info**, then **Run anyway**.
 
 ## Quick start
 

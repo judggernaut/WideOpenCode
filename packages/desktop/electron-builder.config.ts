@@ -134,6 +134,14 @@ const getBase = (appId: string): Configuration => {
 
       if ((await stat(version)).size === 0) throw new Error(`Bundled CLI version must be a non-empty file: ${version}`)
 
+      // A fork has no Apple certificate, so ad-hoc sign the finished app here, after packing and
+      // before the dmg/zip are built. Doing it in the signing hook produced an invalid signature.
+      if (context.electronPlatformName === "darwin" && !process.env.CSC_LINK && !process.env.CSC_NAME) {
+        const { execFileSync } = await import("node:child_process")
+        const app = path.join(context.appOutDir, `${context.packager.appInfo.productFilename}.app`)
+        execFileSync("codesign", ["--force", "--deep", "--sign", "-", app])
+      }
+
       if (context.electronPlatformName !== "win32") return
 
       const prebuilds = path.join(
@@ -170,11 +178,7 @@ const getBase = (appId: string): Configuration => {
       entitlements: "resources/entitlements.plist",
       entitlementsInherit: "resources/entitlements.plist",
       sign: async (options) => {
-        if (!process.env.CSC_LINK && !process.env.CSC_NAME) {
-          const { execFileSync } = await import("node:child_process")
-          execFileSync("codesign", ["--force", "--deep", "--sign", "-", options.app])
-          return
-        }
+        if (!process.env.CSC_LINK && !process.env.CSC_NAME) return
         const { sign } = await import("app-builder-lib/out/codeSign/macCodeSign")
         await sign(macSignOptions(options))
       },
