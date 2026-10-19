@@ -100,6 +100,7 @@ jobs:
     env:
       # Real Developer ID signing + notarization when the Apple certificate secret exists.
       WIDE_SIGN_MAC: ${{ secrets.APPLE_CERTIFICATE && '1' || '' }}
+      WIDE_NOTARIZE_MAC: ${{ secrets.APPLE_API_KEY_P8 && '1' || '' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -117,7 +118,7 @@ jobs:
           node-version: "24"
 
       - name: Import Apple signing certificate
-        if: ${{ runner.os == 'macOS' && secrets.APPLE_CERTIFICATE != '' }}
+        if: ${{ runner.os == 'macOS' && env.WIDE_SIGN_MAC != '' }}
         uses: apple-actions/import-codesign-certs@v2
         with:
           keychain: build
@@ -125,7 +126,7 @@ jobs:
           p12-password: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
 
       - name: Write notarization API key
-        if: ${{ runner.os == 'macOS' && secrets.APPLE_API_KEY_P8 != '' }}
+        if: ${{ runner.os == 'macOS' && env.WIDE_NOTARIZE_MAC != '' }}
         run: printf '%s' "${{ secrets.APPLE_API_KEY_P8 }}" > "$RUNNER_TEMP/apple-api-key.p8"
 
       - name: Install dependencies
