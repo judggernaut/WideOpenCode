@@ -27,6 +27,8 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+          # Upstream workflow updates require Contents and Workflows write access.
+          token: ${{ secrets.WIDE_SYNC_TOKEN }}
 
       - uses: oven-sh/setup-bun@v2
         with:
