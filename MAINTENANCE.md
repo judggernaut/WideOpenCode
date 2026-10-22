@@ -106,6 +106,9 @@ git add -A && git commit -m "chore: sync upstream"
 Prefer anchors that are short, unique, and unlikely to change. For whole files you fully own, use the
 `OVERLAY` map instead of edits.
 
+RPM branding anchors match the package name, not the full `fpm` options list. This keeps upstream
+packaging fixes intact when that list changes.
+
 ## Releases
 
 [`.github/workflows/wide-release.yml`](./.github/workflows/wide-release.yml) builds all CLI targets

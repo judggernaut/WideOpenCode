@@ -154,18 +154,18 @@ const EDITS: Edit[] = [
   },
   {
     file: "packages/desktop/electron-builder.config.ts",
-    find: `        rpm: { packageName: "opencode-dev", fpm: [metainfoFpm(appId)] },`,
-    replace: `        rpm: { packageName: "wideopencode-dev", fpm: [metainfoFpm(appId)] },`,
+    find: `rpm: { packageName: "opencode-dev",`,
+    replace: `rpm: { packageName: "wideopencode-dev",`,
   },
   {
     file: "packages/desktop/electron-builder.config.ts",
-    find: `        rpm: { packageName: "opencode-beta", fpm: [metainfoFpm(appId)] },`,
-    replace: `        rpm: { packageName: "wideopencode-beta", fpm: [metainfoFpm(appId)] },`,
+    find: `rpm: { packageName: "opencode-beta",`,
+    replace: `rpm: { packageName: "wideopencode-beta",`,
   },
   {
     file: "packages/desktop/electron-builder.config.ts",
-    find: `        rpm: { packageName: "opencode", fpm: [metainfoFpm(appId), legacyDesktopEntryFpm] },`,
-    replace: `        rpm: { packageName: "wideopencode", fpm: [metainfoFpm(appId), legacyDesktopEntryFpm] },`,
+    find: `rpm: { packageName: "opencode",`,
+    replace: `rpm: { packageName: "wideopencode",`,
   },
 
   // ----- Desktop: auto-update feed -> this fork's GitHub releases -----
