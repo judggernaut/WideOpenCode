@@ -132,6 +132,10 @@ gh workflow run wide-release.yml --ref main
 
 The optional `version`, `tag` and `prerelease` inputs remain available for manual releases.
 
+Publishing uses `WIDE_SYNC_TOKEN`, the same credential as upstream sync, with Contents and
+Workflows write access. GitHub's built-in `GITHUB_TOKEN` cannot create a release targeting a commit
+whose workflow files differ from the current default branch.
+
 The desktop auto-updater is configured to read this repo's GitHub releases.
 
 ### Optional: signed and notarized macOS builds
