@@ -112,11 +112,25 @@ packaging fixes intact when that list changes.
 ## Releases
 
 [`.github/workflows/wide-release.yml`](./.github/workflows/wide-release.yml) builds all CLI targets
-and the desktop installers and attaches them to a GitHub release. Trigger it manually:
+and the desktop installers when `main` contains an unpublished stable 2.x version in the root
+`package.json`. It checks after pushes to `main` and successful `wide-sync` runs, including syncs
+that have no new commits. A successful sync therefore retries a version whose earlier build failed.
+
+The release tag is `v<version>-wide`. Existing releases are skipped, not deleted or replaced.
+Release runs are serialized, and every build job and the release tag use the same captured commit.
+Publication waits for the CLI build and all desktop builds to succeed.
+
+This follows the version on our synced development branch, not upstream's GitHub Releases listing
+or its separate 1.x stream. It does not promise that the captured commit is the upstream release tag.
+The Bun version comes from the captured commit's `packageManager` field.
+
+To check and build the current version manually:
 
 ```sh
-gh workflow run wide-release.yml -f version=2.0.30 -f tag=v2.0.30-wide
+gh workflow run wide-release.yml --ref main
 ```
+
+The optional `version`, `tag` and `prerelease` inputs remain available for manual releases.
 
 The desktop auto-updater is configured to read this repo's GitHub releases.
 
