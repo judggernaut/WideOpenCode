@@ -10,8 +10,9 @@ import { Headers } from "effect/http"
 import { HttpTransport } from "../route/transport/index.js"
 import {
   AIError,
+  CacheTTL,
   HttpOptions,
-  LLMRequest,
+  type LLMRequest,
   LLMEvent,
   mergeJsonRecords,
   Usage,
@@ -80,7 +81,7 @@ export type ContextManagement = typeof ContextManagement.Type
 // =============================================================================
 const AnthropicCacheControl = Schema.Struct({
   type: Schema.tag("ephemeral"),
-  ttl: Schema.optional(Schema.Literals(["5m", "1h"])),
+  ttl: Schema.optional(CacheTTL),
 })
 const AnthropicServiceTier = knownString<"auto" | "standard_only">()
 const AnthropicSpeed = knownString<"fast" | "standard">()
@@ -533,9 +534,6 @@ const invalid = ProviderShared.invalidRequest
 // that exceed it.
 const ANTHROPIC_BREAKPOINT_CAP = 4
 
-const EPHEMERAL_5M = { type: "ephemeral" as const }
-const EPHEMERAL_1H = { type: "ephemeral" as const, ttl: "1h" as const }
-
 const cacheControl = (breakpoints: Cache.Breakpoints, cache: CacheHint | undefined) => {
   if (cache?.type !== "ephemeral" && cache?.type !== "persistent") return undefined
   if (breakpoints.remaining <= 0) {
@@ -543,7 +541,7 @@ const cacheControl = (breakpoints: Cache.Breakpoints, cache: CacheHint | undefin
     return undefined
   }
   breakpoints.remaining -= 1
-  return Cache.ttlBucket(cache.ttlSeconds) === "1h" ? EPHEMERAL_1H : EPHEMERAL_5M
+  return { type: "ephemeral" as const, ...(cache.ttl === undefined ? {} : { ttl: cache.ttl }) }
 }
 
 const providerMetadata = (key: string, metadata: Record<string, unknown>): ProviderMetadata => ({ [key]: metadata })
@@ -845,6 +843,7 @@ const requireThinkingSignature = (request: LLMRequest) => {
   )
     return false
   if (provider.includes("xiaomi") || model.includes("mimo") || baseURL.includes("xiaomimimo.com")) return false
+  if (model.startsWith("qwen") || model.startsWith("minimax-")) return false
   return true
 }
 
@@ -973,19 +972,9 @@ const lowerMessages = Effect.fnUntraced(function* (request: LLMRequest, breakpoi
             continue
           }
           if (!signature || signature.trim().length === 0) {
-            if (part.text.trim().length === 0) continue
-            if (!requireThinkingSignature(request)) {
+            if (part.text.trim().length > 0 && !requireThinkingSignature(request)) {
               content.push({ type: "thinking", thinking: part.text, signature: "" })
-              continue
             }
-            // Without a signature this cannot be a valid thinking block per
-            // the SDK ThinkingBlockParam:3217 — demote to text so the
-            // conversation remains sendable.
-            content.push({
-              type: "text",
-              text: part.text,
-              cache_control: cacheControl(breakpoints, part.cache),
-            })
             continue
           }
           content.push({ type: "thinking", thinking: part.text, signature })
@@ -1417,10 +1406,7 @@ const onContentBlockDelta = Effect.fnUntraced(function* (
   return [state, NO_EVENTS] satisfies StepResult
 })
 
-const onContentBlockStop = Effect.fnUntraced(function* (
-  state: ParserState,
-  event: AnthropicEvent,
-) {
+const onContentBlockStop = Effect.fnUntraced(function* (state: ParserState, event: AnthropicEvent) {
   if (event.index === undefined) return [state, NO_EVENTS] satisfies StepResult
   if (event.index in state.compactions) {
     const { [event.index]: content, ...compactions } = state.compactions
@@ -1664,12 +1650,13 @@ export const transport = <
       const betas = new Set([...existingBetas, ...requiredBetas])
       return http.prepare({
         ...input,
-        request: LLMRequest.update(input.request, {
+        request: {
+          ...input.request,
           http: new HttpOptions({
             ...input.request.http,
             headers: { ...headers, "anthropic-beta": [...betas].join(",") },
           }),
-        }),
+        },
       })
     },
   }
