@@ -154,21 +154,34 @@ const EDITS: Edit[] = [
   },
   {
     file: "packages/desktop/electron-builder.config.ts",
-    find: `rpm: { packageName: "opencode-dev",`,
-    replace: `rpm: { packageName: "wideopencode-dev",`,
+    find: `packageName: "opencode-dev",`,
+    replace: `packageName: "wideopencode-dev",`,
   },
   {
     file: "packages/desktop/electron-builder.config.ts",
-    find: `rpm: { packageName: "opencode-beta",`,
-    replace: `rpm: { packageName: "wideopencode-beta",`,
+    find: `packageName: "opencode-beta",`,
+    replace: `packageName: "wideopencode-beta",`,
   },
   {
     file: "packages/desktop/electron-builder.config.ts",
-    find: `rpm: { packageName: "opencode",`,
-    replace: `rpm: { packageName: "wideopencode",`,
+    find: `packageName: "opencode",`,
+    replace: `packageName: "wideopencode",`,
   },
 
   // ----- Desktop: auto-update feed -> this fork's GitHub releases -----
+  {
+    file: "packages/desktop/electron-builder.config.ts",
+    find: `        publish: {
+          provider: "generic",
+          url: "https://opencode.ai/update/api/dev/desktop/opencode/",
+          channel: "latest",
+        },`,
+    replace: `        publish: {
+          provider: "github",
+          owner: "${OWNER}",
+          repo: "${REPO}",
+        },`,
+  },
   {
     file: "packages/desktop/electron-builder.config.ts",
     find: `        publish: {
@@ -247,8 +260,8 @@ const EDITS: Edit[] = [
   },
   {
     file: "packages/desktop/src/renderer/index.html",
-    find: `<title>OpenCode</title>`,
-    replace: `<title>WideOpenCode</title>`,
+    find: `>OpenCode</title>`,
+    replace: `>WideOpenCode</title>`,
   },
 
   // ----- Desktop: native menu / dialog copy -----
@@ -307,26 +320,21 @@ const EDITS: Edit[] = [
     replace: `Name=WideOpenCode`,
   },
   {
-    file: "packages/desktop/scripts/copy-metainfo.ts",
+    file: "packages/desktop/script/copy-metainfo.ts",
     find: `const appId = channel === "prod" ? "ai.opencode.desktop" : \`ai.opencode.desktop.\${channel}\``,
     replace: `const appId = channel === "prod" ? "ai.wideopencode.desktop" : \`ai.wideopencode.desktop.\${channel}\``,
   },
   {
-    file: "packages/desktop/scripts/copy-metainfo.ts",
+    file: "packages/desktop/script/copy-metainfo.ts",
     find: `const productName = channel === "prod" ? "OpenCode" : \`OpenCode \${channel.charAt(0).toUpperCase() + channel.slice(1)}\``,
     replace: `const productName = channel === "prod" ? "WideOpenCode" : \`WideOpenCode \${channel.charAt(0).toUpperCase() + channel.slice(1)}\``,
   },
 
   // ----- Desktop: bundle the renamed CLI binary -----
   {
-    file: "packages/desktop/scripts/utils.ts",
+    file: "packages/desktop/script/utils.ts",
     find: `  await copyFile(join(pkg, "bin", cli.os === "win32" ? "opencode.exe" : "opencode"), dest)`,
     replace: `  await copyFile(join(pkg, "bin", cli.os === "win32" ? "wideopencode.exe" : "wideopencode"), dest)`,
-  },
-  {
-    file: "packages/desktop/scripts/utils.ts",
-    find: `  if (process.platform === "win32" && process.env.GITHUB_ACTIONS === "true") {`,
-    replace: `  if (process.platform === "win32" && process.env.GITHUB_ACTIONS === "true" && process.env.AZURE_TRUSTED_SIGNING_ENDPOINT) {`,
   },
 
   // ----- Desktop: signing. Real signing/notarization when WIDE_SIGN_MAC is set
@@ -336,28 +344,33 @@ const EDITS: Edit[] = [
   // macOS reports as a damaged app.
   {
     file: "packages/desktop/electron-builder.config.ts",
-    find: `      sign: async (options) => {
-        const { sign } = await import("app-builder-lib/out/codeSign/macCodeSign")
-        await sign(macSignOptions(options))
-      },
-      notarize: true,`,
-    replace: `      sign: async (options) => {
+    find: `    mac: {
+      category: "public.app-category.developer-tools",`,
+    replace: `    mac: {
+      category: "public.app-category.developer-tools",
+      hardenedRuntime: true,
+      gatekeeperAssess: false,
+      entitlements: "../../.github/release/entitlements/desktop.plist",
+      entitlementsInherit: "../../.github/release/entitlements/desktop.plist",
+      sign: async (options) => {
         if (!process.env.WIDE_SIGN_MAC) return
         const { sign } = await import("app-builder-lib/out/codeSign/macCodeSign")
-        await sign(macSignOptions(options))
+        await sign({
+          ...options,
+          optionsForFile: (file) => {
+            const defaults = options.optionsForFile?.(file)
+            if (file !== path.join(options.app, "Contents/Resources/opencode-cli")) return defaults ?? {}
+            return { ...defaults, entitlements: path.join(packageDir, "../../.github/release/entitlements/desktop-cli.plist") }
+          },
+        })
       },
       notarize: Boolean(process.env.WIDE_SIGN_MAC),`,
   },
   {
     file: "packages/desktop/electron-builder.config.ts",
-    find: `      if ((await stat(version)).size === 0) throw new Error(\`Bundled CLI version must be a non-empty file: \${version}\`)
-
-      if (context.electronPlatformName !== "win32") return`,
-    replace: `      if ((await stat(version)).size === 0) throw new Error(\`Bundled CLI version must be a non-empty file: \${version}\`)
-
-      // No Apple certificate (WIDE_SIGN_MAC unset): ad-hoc sign the finished app here, after
-      // packing and before the dmg/zip are built. With a certificate, electron-builder signs.
-      if (context.electronPlatformName === "darwin" && !process.env.WIDE_SIGN_MAC) {
+    find: `      if (context.electronPlatformName !== "win32") return`,
+    replace: `      if (context.electronPlatformName === "darwin" && !process.env.WIDE_SIGN_MAC) {
+        // Without a certificate, sign after packing and before building the installers.
         const { execFileSync } = await import("node:child_process")
         const app = path.join(context.appOutDir, \`\${context.packager.appInfo.productFilename}.app\`)
         execFileSync("codesign", ["--force", "--deep", "--sign", "-", app])
@@ -367,8 +380,8 @@ const EDITS: Edit[] = [
   },
   {
     file: "packages/desktop/electron-builder.config.ts",
-    find: `  if (process.env.GITHUB_ACTIONS !== "true") return`,
-    replace: `  if (process.env.GITHUB_ACTIONS !== "true" || !process.env.AZURE_TRUSTED_SIGNING_ENDPOINT) return`,
+    find: `mac: { ...base.mac, icon: "resources/icons/icon.icon" },`,
+    replace: `mac: { ...base.mac, icon: "resources/icons/icon.icns" },`,
   },
 ]
 
@@ -384,12 +397,14 @@ async function patch(edit: Edit): Promise<boolean> {
   const file = path.join(root, edit.file)
   const text = await readFile(file, "utf8")
 
-  if (text.includes(edit.replace)) return false
-  if (!text.includes(edit.find))
+  if (edit.replace.includes(edit.find) && text.includes(edit.replace)) return false
+  if (!text.includes(edit.find)) {
+    if (text.includes(edit.replace)) return false
     throw new Error(
       `Anchor not found in ${edit.file}. Upstream likely changed this file; update script/wide/apply.ts.\n` +
         `Missing:\n${edit.find}`,
     )
+  }
 
   await writeFile(file, text.replace(edit.find, edit.replace))
   return true

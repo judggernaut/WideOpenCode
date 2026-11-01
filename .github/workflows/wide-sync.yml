@@ -30,10 +30,6 @@ jobs:
           # Upstream workflow updates require Contents and Workflows write access.
           token: ${{ secrets.WIDE_SYNC_TOKEN }}
 
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: 1.4.2
-
       - name: Configure git
         run: |
           git config user.name "wideopencode-bot"
@@ -48,11 +44,19 @@ jobs:
       - name: Merge upstream (prefer upstream on conflict)
         run: git merge --no-commit --no-edit -X theirs upstream/dev || true
 
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: package.json
+
       - name: Apply WideOpenCode overlay
         run: bun run script/wide/apply.ts
 
       - name: Verify overlay
         run: bun run script/wide/verify.ts
+
+      - name: Test overlay
+        working-directory: script/wide
+        run: bun test apply.test.ts
 
       - name: Commit and push
         run: |

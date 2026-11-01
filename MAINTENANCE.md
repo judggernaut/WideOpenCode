@@ -107,7 +107,13 @@ Prefer anchors that are short, unique, and unlikely to change. For whole files y
 `OVERLAY` map instead of edits.
 
 RPM branding anchors match the package name, not the full `fpm` options list. This keeps upstream
-packaging fixes intact when that list changes.
+packaging fixes intact when that list changes or the RPM configuration spans multiple lines.
+An edit checks for its upstream anchor before checking whether the replacement already exists
+elsewhere in the file, so one branded channel cannot hide an unbranded update feed in another.
+
+Sync runs `script/wide/apply.test.ts` against a temporary copy of the merged tree. This exercises
+the overlay and verification together, preserves packaging options and checks a second apply is
+idempotent. Missing anchors still stop the sync.
 
 ## Releases
 
@@ -123,6 +129,8 @@ Publication waits for the CLI build and all desktop builds to succeed.
 This follows the version on our synced development branch, not upstream's GitHub Releases listing
 or its separate 1.x stream. It does not promise that the captured commit is the upstream release tag.
 The Bun version comes from the captured commit's `packageManager` field.
+Desktop `bun run build` prepares resources and bundles the downloaded CLI from
+`packages/cli/dist`; `OPENCODE_TARGET` uses names such as `darwin-arm64` and `windows-x64`.
 
 To check and build the current version manually:
 
@@ -157,7 +165,8 @@ and passes the notarization key to electron-builder. The config in `electron-bui
 reads `WIDE_SIGN_MAC` to decide between real signing (and `notarize: true`) and the ad-hoc fallback.
 Without the secret, nothing changes and the ad-hoc build is produced.
 
-Windows signing is separate: it is skipped unless the `AZURE_TRUSTED_SIGNING_*` secrets are set.
+Windows installers are unsigned. This fork does not use upstream's new post-packaging Windows
+signing pipeline.
 
 ## Known differences from upstream (and why)
 

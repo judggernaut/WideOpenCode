@@ -125,19 +125,19 @@ jobs:
       matrix:
         include:
           - host: macos-14
-            target: aarch64-apple-darwin
+            target: darwin-arm64
             platform_flag: --mac --arm64
             install_flags: ""
           - host: macos-14
-            target: x86_64-apple-darwin
+            target: darwin-x64
             platform_flag: --mac --x64
             install_flags: --cpu=*
           - host: windows-latest
-            target: x86_64-pc-windows-msvc
+            target: windows-x64
             platform_flag: --win
             install_flags: ""
           - host: ubuntu-latest
-            target: x86_64-unknown-linux-gnu
+            target: linux-x64
             platform_flag: --linux
             install_flags: ""
     runs-on: ${{ matrix.host }}
@@ -185,15 +185,6 @@ jobs:
         if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends rpm
 
-      - name: Prepare
-        working-directory: packages/desktop
-        run: bun ./scripts/prepare.ts
-        env:
-          OPENCODE_VERSION: ${{ needs.plan.outputs.version }}
-          OPENCODE_CHANNEL: prod
-          OPENCODE_CLI_TARGET: ${{ matrix.target }}
-          OPENCODE_CLI_DIST: ${{ github.workspace }}/packages/cli/dist
-
       - name: Build renderer + main
         working-directory: packages/desktop
         run: bun run build
@@ -201,15 +192,15 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=4096
           OPENCODE_VERSION: ${{ needs.plan.outputs.version }}
           OPENCODE_CHANNEL: prod
-          OPENCODE_CLI_TARGET: ${{ matrix.target }}
-          OPENCODE_CLI_DIST: ${{ github.workspace }}/packages/cli/dist
+          OPENCODE_TARGET: ${{ matrix.target }}
 
       - name: Package
         working-directory: packages/desktop
         run: npx electron-builder ${{ matrix.platform_flag }} --publish never --config electron-builder.config.ts
         env:
+          OPENCODE_VERSION: ${{ needs.plan.outputs.version }}
           OPENCODE_CHANNEL: prod
-          OPENCODE_CLI_TARGET: ${{ matrix.target }}
+          OPENCODE_TARGET: ${{ matrix.target }}
           CSC_IDENTITY_AUTO_DISCOVERY: ${{ secrets.APPLE_CERTIFICATE && 'true' || 'false' }}
           CSC_KEYCHAIN: ${{ secrets.APPLE_CERTIFICATE && 'build' || '' }}
           APPLE_API_KEY: ${{ runner.temp }}/apple-api-key.p8
