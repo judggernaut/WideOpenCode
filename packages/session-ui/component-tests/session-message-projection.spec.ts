@@ -122,6 +122,43 @@ story.describe("message actions menu", () => {
   })
 })
 
+story("keeps the footer in view while an outside click closes the actions menu", async ({ mount, page }) => {
+  const timeline = await mount("current-prompt-message--pending")
+  const footer = timeline.locator('[data-slot="user-message-copy-wrapper"]')
+
+  await timeline.getByLabel("Delivery state").selectOption("delivered")
+  await timeline.locator('[data-component="user-message"]').hover()
+  await timeline.getByRole("button", { name: "More actions", exact: true }).click()
+  await expect(page.getByRole("menu")).toBeVisible()
+  await page.mouse.move(0, 0)
+
+  // Kobalte drops the expanded state a task before it returns focus to the trigger, so record every frame from the
+  // click until a few frames after the menu has gone rather than the settled state.
+  const frames = await footer.evaluateHandle((element) => {
+    const opacities: string[] = []
+    const closed = { frames: 0 }
+
+    const done = new Promise<string[]>((resolve) => {
+      const tick = () => {
+        opacities.push(getComputedStyle(element).opacity)
+
+        if (!document.querySelector('[role="menu"]')) closed.frames += 1
+
+        if (closed.frames < 5) return requestAnimationFrame(tick)
+
+        resolve(opacities)
+      }
+
+      requestAnimationFrame(tick)
+    })
+
+    return { done }
+  })
+
+  await page.mouse.click(0, 0)
+  expect(new Set(await frames.evaluate((sampler) => sampler.done))).toEqual(new Set(["1"]))
+})
+
 story("keeps pending steer actions usable after a request fails", async ({ mount }) => {
   const timeline = await mount("current-prompt-message--pending")
   const queue = timeline.getByRole("button", { name: "Move to queue", exact: true })
@@ -206,13 +243,16 @@ story("marks pending metadata without badging delivered, starting, or queued pro
   const indicator = timeline.locator('[data-slot="user-message-meta"] [data-slot="user-message-pending"]')
   const text = timeline.locator('[data-slot="user-message-text"]')
 
-  for (const status of ["steering", "stranded", "starting", "queued", "delivered"]) {
+  for (const status of ["steering", "stranded", "sending", "starting", "queued", "delivered"]) {
     await timeline.getByLabel("Delivery state").selectOption(status)
-    const pending = status === "steering" || status === "stranded"
+    const pending = status === "steering" || status === "stranded" || status === "sending"
 
     if (pending) await expect(indicator).toBeVisible()
 
     if (!pending) await expect(indicator).toBeHidden()
+
+    // A prompt still sending has no server row, so it offers no action until the server has it.
+    await expect(timeline.locator('[data-slot="user-message-actions"]')).toHaveCount(status === "sending" ? 0 : 1)
 
     const colors = await timeline.evaluate((element, pending) => {
       const probe = document.createElement("span")
@@ -382,6 +422,20 @@ story("renders user image, file attachment, file reference, and agent reference"
   expect(attachmentsBox).not.toBeNull()
   expect(bodyBox).not.toBeNull()
   expect(bodyBox!.y - (attachmentsBox!.y + attachmentsBox!.height)).toBe(8)
+})
+
+story("a stored image that fails to load shows a failed tile that retries", async ({ mount }) => {
+  const timeline = await mount("current-session-timeline-rows--conversation", { args: { scenario: "media" } })
+  const tiles = timeline.locator('[data-slot="user-message-attachment"]')
+
+  await expect(timeline.getByAltText("ready.svg")).toBeVisible()
+  // A failed read used to keep the loading placeholder forever.
+  const failed = tiles.first()
+  await expect(failed.getByRole("img", { name: "Unable to load image." })).toBeVisible()
+  await expect(failed).not.toHaveAttribute("data-placeholder")
+
+  await failed.click()
+  await expect(timeline.getByAltText("flaky.svg")).toBeVisible()
 })
 
 story("shows note selectors and keeps annotation subtitles with or without comments", async ({ mount, page }) => {
