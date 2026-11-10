@@ -16,7 +16,7 @@ import { absoluteUrl, markdownHeaders } from "~/lib/markdown"
 import { changelogEntryJson } from "~/lib/changelog-releases"
 import { findPageMarkdown, renderPageMarkdown } from "~/lib/page-markdown"
 import { htmlCache } from "~/lib/html-cache"
-import { oneStylesheet } from "~/lib/one-stylesheet"
+import { headLinks } from "~/lib/head-links"
 import securityTxt from "~/lib/legal/security.txt?raw"
 import humansTxt from "~/lib/humans.txt?raw"
 import { robotsTxt } from "~/lib/robots-txt"
@@ -26,11 +26,13 @@ import { metaResponse } from "~/lib/meta"
 import { setSecurityHeaders } from "~/lib/security-headers"
 import { noindexDev } from "~/lib/noindex"
 import { docsMiddleware } from "~/docs/middleware"
+import { staticPages } from "~/static/render"
 
 // dev.opencode.ai's noindex header on every response (lib/noindex.ts), then the docs (everything
 // under /docs and /v1/docs, and the V1 docs' old host, docs/middleware.ts), then the page middleware, then the HTML cache headers and edge
-// cache (lib/html-cache.ts), which see the request without its locale, then one stylesheet per page
-// (lib/one-stylesheet.ts), inside the cache so cached pages carry it too.
+// cache (lib/html-cache.ts), which see the request without its locale, then the page's head links
+// (lib/head-links.ts), inside the cache so cached pages carry them too, then the pages rendered
+// without hydration (static/render.tsx), which answer before the app does.
 export default [
   noindexDev,
   ...docsMiddleware,
@@ -144,7 +146,8 @@ export default [
     },
   }),
   htmlCache,
-  oneStylesheet,
+  headLinks,
+  staticPages,
 ]
 
 // The text files above change with releases and carry dates, so they are cached for an hour.
