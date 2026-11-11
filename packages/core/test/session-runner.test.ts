@@ -469,6 +469,7 @@ const layer = Layer.unwrap(
           wake: coordinator.wake,
           interrupt: (sessionID) => coordinator.interrupt(sessionID),
           awaitIdle: coordinator.awaitIdle,
+          periodStartSeq: () => Effect.succeed(undefined),
         })
       }),
     ).pipe(
@@ -4228,6 +4229,10 @@ describe("SessionRunnerLLM", () => {
     expect(assistant.time.streamed).toBeDefined()
     expect(DateTime.toEpochMillis(assistant.time.streamed!) - DateTime.toEpochMillis(assistant.time.created)).toBe(
       5_000,
+    )
+    // The tool call was the first output, recorded two seconds after dispatch and before the stream ended.
+    expect(DateTime.toEpochMillis(assistant.time.firstToken!) - DateTime.toEpochMillis(assistant.time.created)).toBe(
+      2_000,
     )
     expect(assistant.time.completed).toBeUndefined()
     expect(assistant.content).toMatchObject([{ type: "tool", state: { status: "running" } }])
