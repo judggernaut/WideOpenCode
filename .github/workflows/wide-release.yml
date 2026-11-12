@@ -124,11 +124,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - host: macos-14
+          - host: macos-15
             target: darwin-arm64
             platform_flag: --mac --arm64
             install_flags: ""
-          - host: macos-14
+          - host: macos-15
             target: darwin-x64
             platform_flag: --mac --x64
             install_flags: --cpu=*
