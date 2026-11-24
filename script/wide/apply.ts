@@ -211,40 +211,51 @@ const EDITS: Edit[] = [
 
   // ----- Desktop: runtime app identity -----
   {
-    file: "packages/desktop/src/main/constants.ts",
-    find: `const appNames: Record<string, string> = {
+    file: "packages/desktop/src/main/identity.ts",
+    find: `const appNames: Record<Channel, string> = {
+  local: "OpenCode Dev",
   dev: "OpenCode Dev",
   beta: "OpenCode Beta",
   prod: "OpenCode",
 }`,
-    replace: `const appNames: Record<string, string> = {
+    replace: `const appNames: Record<Channel, string> = {
+  local: "WideOpenCode Dev",
   dev: "WideOpenCode Dev",
   beta: "WideOpenCode Beta",
   prod: "WideOpenCode",
 }`,
   },
   {
-    file: "packages/desktop/src/main/constants.ts",
-    find: `const appIDs: Record<string, string> = {
+    file: "packages/desktop/src/main/identity.ts",
+    find: `const appIDs: Record<Channel, string> = {
+  local: "ai.opencode.desktop.dev",
   dev: "ai.opencode.desktop.dev",
   beta: "ai.opencode.desktop.beta",
   prod: "ai.opencode.desktop",
 }`,
-    replace: `const appIDs: Record<string, string> = {
+    replace: `const appIDs: Record<Channel, string> = {
+  local: "ai.wideopencode.desktop.dev",
   dev: "ai.wideopencode.desktop.dev",
   beta: "ai.wideopencode.desktop.beta",
   prod: "ai.wideopencode.desktop",
 }`,
   },
   {
-    file: "packages/desktop/src/main/constants.ts",
-    find: `export const APP_NAME = app.isPackaged ? appNames[CHANNEL] : "OpenCode Dev"`,
-    replace: `export const APP_NAME = app.isPackaged ? appNames[CHANNEL] : "WideOpenCode Dev"`,
+    file: "packages/desktop/src/main/identity.ts",
+    find: `const LOCAL_APP_USER_MODEL_ID = "ai.opencode.desktop.local"`,
+    replace: `const LOCAL_APP_USER_MODEL_ID = "ai.wideopencode.desktop.local"`,
   },
   {
-    file: "packages/desktop/src/main/constants.ts",
-    find: `export const APP_ID = app.isPackaged ? appIDs[CHANNEL] : "ai.opencode.desktop.dev"`,
-    replace: `export const APP_ID = app.isPackaged ? appIDs[CHANNEL] : "ai.wideopencode.desktop.dev"`,
+    file: "packages/desktop/src/main/identity.ts",
+    find: `    appName: packaged ? appNames[channel] : "OpenCode Dev",
+    appID: packaged ? appIDs[channel] : "ai.opencode.desktop.dev",`,
+    replace: `    appName: packaged ? appNames[channel] : "WideOpenCode Dev",
+    appID: packaged ? appIDs[channel] : "ai.wideopencode.desktop.dev",`,
+  },
+  {
+    file: "packages/desktop/src/main/identity.test.ts",
+    find: identityCases("OpenCode", "opencode"),
+    replace: identityCases("WideOpenCode", "wideopencode"),
   },
 
   // ----- Desktop: window titles -----
@@ -384,6 +395,25 @@ const EDITS: Edit[] = [
     replace: `mac: { ...base.mac, icon: "resources/icons/icon.icns" },`,
   },
 ]
+
+// The resolveIdentity cases in identity.test.ts, rendered for a given brand.
+function identityCases(name: string, id: string) {
+  const row = (channel: string, packaged: boolean, appName: string, suffix: string, aumid: string) =>
+    `  {
+    channel: "${channel}",
+    packaged: ${packaged},
+    appName: "${appName}",
+    appID: "ai.${id}.desktop${suffix}",
+    appUserModelID: "ai.${id}.desktop${aumid}",
+  },`
+  return [
+    row("dev", true, `${name} Dev`, ".dev", ".dev"),
+    row("beta", true, `${name} Beta`, ".beta", ".beta"),
+    row("prod", true, name, "", ""),
+    row("local", false, `${name} Dev`, ".dev", ".local"),
+    row("dev", false, `${name} Dev`, ".dev", ".local"),
+  ].join("\n")
+}
 
 async function patchPrompt(rel: string): Promise<boolean> {
   const file = path.join(root, rel)
