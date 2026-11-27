@@ -516,8 +516,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Llista els fitxers dins d'un directori",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Executeu ordres de shell",
+  "settings.permissions.tool.shell.description": "Executeu ordres de shell",
   "settings.permissions.tool.task.title": "Tasca",
   "settings.permissions.tool.task.description": "Llançar subagents",
+  "settings.permissions.tool.subagent.description": "Llançar subagents",
   "settings.permissions.tool.skill.title": "Habilitat",
   "settings.permissions.tool.skill.description": "Carregueu una habilitat pel nom",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1260,8 +1262,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Cronologia nova",
   "settings.experimental.row.newTimeline.description":
     "Una cronologia de sessió redissenyada que agrupa el que ha fet l'agent, amb una sola línia d'estat sota el torn",
-  "settings.experimental.row.newQuestionUI.title": "Interfície de preguntes nova",
-  "settings.experimental.row.newQuestionUI.description": "Previsualitza el tauler de preguntes pensat per al teclat",
   "settings.experimental.row.sidebarOrganize.title": "Organitza la barra lateral vertical",
   "settings.experimental.row.sidebarOrganize.description":
     "Trieu com es llisten les sessions a la barra lateral. Només s'aplica a les pestanyes laterals.",

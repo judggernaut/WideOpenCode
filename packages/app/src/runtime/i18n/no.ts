@@ -677,8 +677,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "List opp filer i en mappe",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Kjør shell-kommandoer",
+  "settings.permissions.tool.shell.description": "Kjør shell-kommandoer",
   "settings.permissions.tool.task.title": "Oppgave",
   "settings.permissions.tool.task.description": "Start underagenter",
+  "settings.permissions.tool.subagent.description": "Start underagenter",
   "settings.permissions.tool.skill.title": "Ferdighet",
   "settings.permissions.tool.skill.description": "Last en ferdighet etter navn",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1292,8 +1294,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Ny tidslinje",
   "settings.experimental.row.newTimeline.description":
     "En redesignet økttidslinje som grupperer det agenten gjorde, med én statuslinje under runden",
-  "settings.experimental.row.newQuestionUI.title": "Nytt spørsmålsgrensesnitt",
-  "settings.experimental.row.newQuestionUI.description": "Forhåndsvis det tastaturstyrte spørsmålspanelet",
   "settings.experimental.row.sidebarOrganize.title": "Organiser loddrett sidepanel",
   "settings.experimental.row.sidebarOrganize.description":
     "Velg hvordan økter listes i sidepanelet. Gjelder bare sidefaner.",

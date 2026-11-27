@@ -514,8 +514,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Ցուցակել ֆայլերը գրացուցակում",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Գործարկել Shell հրամանները",
+  "settings.permissions.tool.shell.description": "Գործարկել Shell հրամանները",
   "settings.permissions.tool.task.title": "Առաջադրանք",
   "settings.permissions.tool.task.description": "Ենթագործակալների գործարկում",
+  "settings.permissions.tool.subagent.description": "Ենթագործակալների գործարկում",
   "settings.permissions.tool.skill.title": "Հմտություն",
   "settings.permissions.tool.skill.description": "Բեռնել հմտությունը ըստ անունով",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1227,8 +1229,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Նոր ժամանակագիծ",
   "settings.experimental.row.newTimeline.description":
     "Վերանախագծված նիստի ժամանակագիծ, որը խմբավորում է գործակալի արածը՝ մեկ կարգավիճակի տողով քայլի տակ",
-  "settings.experimental.row.newQuestionUI.title": "Հարցերի նոր ինտերֆեյս",
-  "settings.experimental.row.newQuestionUI.description": "Նախադիտել ստեղնաշարակենտրոն հարցերի վահանակը",
   "settings.experimental.row.sidebarOrganize.title": "Կազմակերպել ուղղահայաց կողագոտին",
   "settings.experimental.row.sidebarOrganize.description":
     "Ընտրեք, թե ինչպես են նիստերը ցուցադրվում կողագոտում։ Կիրառվում է միայն կողային ներդիրների դեպքում։",

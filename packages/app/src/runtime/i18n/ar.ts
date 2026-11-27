@@ -493,8 +493,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "سرد الملفات داخل دليل",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "تشغيل أوامر shell",
+  "settings.permissions.tool.shell.description": "تشغيل أوامر shell",
   "settings.permissions.tool.task.title": "مهمة",
   "settings.permissions.tool.task.description": "تشغيل الوكلاء الفرعيين",
+  "settings.permissions.tool.subagent.description": "تشغيل الوكلاء الفرعيين",
   "settings.permissions.tool.skill.title": "مهارة",
   "settings.permissions.tool.skill.description": "تحميل مهارة بالاسم",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1303,8 +1305,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "مخطط زمني جديد",
   "settings.experimental.row.newTimeline.description":
     "مخطط زمني للجلسة بتصميم جديد يجمع ما قام به الوكيل، مع سطر حالة واحد أسفل الدور",
-  "settings.experimental.row.newQuestionUI.title": "واجهة أسئلة جديدة",
-  "settings.experimental.row.newQuestionUI.description": "معاينة لوحة الأسئلة المعتمدة على لوحة المفاتيح",
   "settings.experimental.row.sidebarOrganize.title": "تنظيم الشريط الجانبي العمودي",
   "settings.experimental.row.sidebarOrganize.description":
     "اختر طريقة عرض الجلسات في الشريط الجانبي. ينطبق على علامات التبويب الجانبية فقط.",

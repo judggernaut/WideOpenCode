@@ -519,8 +519,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "ディレクトリ内のファイル一覧表示",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "シェルコマンドの実行",
+  "settings.permissions.tool.shell.description": "シェルコマンドの実行",
   "settings.permissions.tool.task.title": "タスク",
   "settings.permissions.tool.task.description": "サブエージェントの起動",
+  "settings.permissions.tool.subagent.description": "サブエージェントの起動",
   "settings.permissions.tool.skill.title": "スキル",
   "settings.permissions.tool.skill.description": "名前によるスキルの読み込み",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1240,8 +1242,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "新しいタイムライン",
   "settings.experimental.row.newTimeline.description":
     "エージェントの作業をグループ化し、ターンの下に1行のステータスを表示する、再設計されたセッションタイムライン",
-  "settings.experimental.row.newQuestionUI.title": "新しい質問UI",
-  "settings.experimental.row.newQuestionUI.description": "キーボード操作を重視した質問ドックをプレビュー",
   "settings.experimental.row.sidebarOrganize.title": "縦型サイドバーの整理",
   "settings.experimental.row.sidebarOrganize.description":
     "サイドバーでのセッションの表示方法を選択します。サイドタブでのみ適用されます。",

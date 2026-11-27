@@ -635,8 +635,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Dateien in einem Verzeichnis auflisten",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Shell-Befehle ausführen",
+  "settings.permissions.tool.shell.description": "Shell-Befehle ausführen",
   "settings.permissions.tool.task.title": "Aufgabe",
   "settings.permissions.tool.task.description": "Unteragenten starten",
+  "settings.permissions.tool.subagent.description": "Unteragenten starten",
   "settings.permissions.tool.skill.title": "Skill",
   "settings.permissions.tool.skill.description": "Einen Skill anhand des Namens laden",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1266,8 +1268,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Neue Timeline",
   "settings.experimental.row.newTimeline.description":
     "Eine neu gestaltete Sitzungs-Timeline, die die Aktionen des Agenten gruppiert, mit einer Statuszeile unter der Runde",
-  "settings.experimental.row.newQuestionUI.title": "Neue Fragen-Oberfläche",
-  "settings.experimental.row.newQuestionUI.description": "Vorschau des tastaturorientierten Fragenbereichs",
   "settings.experimental.row.sidebarOrganize.title": "Vertikale Seitenleiste organisieren",
   "settings.experimental.row.sidebarOrganize.description":
     "Wählen Sie, wie Sitzungen in der Seitenleiste aufgelistet werden. Gilt nur für seitliche Tabs.",

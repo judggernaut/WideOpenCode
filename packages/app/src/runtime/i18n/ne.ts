@@ -517,8 +517,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "निर्देशिका भित्र फाइलहरू सूचीबद्ध गर्नुहोस्",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "शेल आदेशहरू चलाउनुहोस्",
+  "settings.permissions.tool.shell.description": "शेल आदेशहरू चलाउनुहोस्",
   "settings.permissions.tool.task.title": "कार्य",
   "settings.permissions.tool.task.description": "उप-एजेन्टहरू सुरु गर्नुहोस्",
+  "settings.permissions.tool.subagent.description": "उप-एजेन्टहरू सुरु गर्नुहोस्",
   "settings.permissions.tool.skill.title": "सीप",
   "settings.permissions.tool.skill.description": "नाम द्वारा एक कौशल लोड गर्नुहोस्",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1230,8 +1232,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "नयाँ समयरेखा",
   "settings.experimental.row.newTimeline.description":
     "एजेन्टले गरेका कामलाई समूहबद्ध गर्ने, पालोको तल एउटा स्थिति लाइनसहितको पुनः डिजाइन गरिएको सत्र समयरेखा",
-  "settings.experimental.row.newQuestionUI.title": "नयाँ प्रश्न UI",
-  "settings.experimental.row.newQuestionUI.description": "किबोर्ड-प्रथम प्रश्न डकको पूर्वावलोकन गर्नुहोस्",
   "settings.experimental.row.sidebarOrganize.title": "ठाडो साइडबार व्यवस्थित गर्नुहोस्",
   "settings.experimental.row.sidebarOrganize.description":
     "साइडबारमा सत्रहरू कसरी सूचीबद्ध हुने छान्नुहोस्। साइड ट्याबहरूमा मात्र लागू हुन्छ।",

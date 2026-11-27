@@ -489,8 +489,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Wyświetlanie listy plików w katalogu",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Uruchamianie poleceń powłoki",
+  "settings.permissions.tool.shell.description": "Uruchamianie poleceń powłoki",
   "settings.permissions.tool.task.title": "Zadanie",
   "settings.permissions.tool.task.description": "Uruchamianie podagentów",
+  "settings.permissions.tool.subagent.description": "Uruchamianie podagentów",
   "settings.permissions.tool.skill.title": "Umiejętność",
   "settings.permissions.tool.skill.description": "Ładowanie umiejętności według nazwy",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1287,8 +1289,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Nowa oś czasu",
   "settings.experimental.row.newTimeline.description":
     "Przeprojektowana oś czasu sesji, która grupuje działania agenta, z jednym wierszem statusu pod turą",
-  "settings.experimental.row.newQuestionUI.title": "Nowy interfejs pytań",
-  "settings.experimental.row.newQuestionUI.description": "Wypróbuj panel pytań obsługiwany przede wszystkim klawiaturą",
   "settings.experimental.row.sidebarOrganize.title": "Porządkuj pionowy pasek boczny",
   "settings.experimental.row.sidebarOrganize.description":
     "Wybierz sposób wyświetlania sesji na pasku bocznym. Dotyczy tylko kart bocznych.",

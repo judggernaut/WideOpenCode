@@ -511,8 +511,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "ფაილების სია დირექტორიაში",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "გარსის ბრძანებების გაშვება",
+  "settings.permissions.tool.shell.description": "გარსის ბრძანებების გაშვება",
   "settings.permissions.tool.task.title": "ამოცანა",
   "settings.permissions.tool.task.description": "ქვე-აგენტების გაშვება",
+  "settings.permissions.tool.subagent.description": "ქვე-აგენტების გაშვება",
   "settings.permissions.tool.skill.title": "უნარი",
   "settings.permissions.tool.skill.description": "უნარის ჩატვირთვა სახელით",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1230,8 +1232,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "ახალი დროის ხაზი",
   "settings.experimental.row.newTimeline.description":
     "სესიის გადამუშავებული დროის ხაზი, რომელიც აჯგუფებს აგენტის ქმედებებს და სვლის ქვემოთ აჩვენებს ერთ სტატუსის ხაზს",
-  "settings.experimental.row.newQuestionUI.title": "კითხვების ახალი ინტერფეისი",
-  "settings.experimental.row.newQuestionUI.description": "კლავიატურაზე ორიენტირებული კითხვების პანელის წინასწარი ნახვა",
   "settings.experimental.row.sidebarOrganize.title": "ვერტიკალური გვერდითი ზოლის ორგანიზება",
   "settings.experimental.row.sidebarOrganize.description":
     "აირჩიეთ, როგორ ჩამოითვალოს სესიები გვერდით ზოლში. ეხება მხოლოდ გვერდით ჩანართებს.",

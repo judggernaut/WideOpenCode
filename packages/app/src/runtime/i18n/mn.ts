@@ -516,8 +516,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Сан доторх файлуудыг жагсаах",
   "settings.permissions.tool.bash.title": "Баш",
   "settings.permissions.tool.bash.description": "shell тушаалуудыг ажиллуул",
+  "settings.permissions.tool.shell.description": "shell тушаалуудыг ажиллуул",
   "settings.permissions.tool.task.title": "Даалгавар",
   "settings.permissions.tool.task.description": "Дэд агентуудыг ажиллуул",
+  "settings.permissions.tool.subagent.description": "Дэд агентуудыг ажиллуул",
   "settings.permissions.tool.skill.title": "Ур чадвар",
   "settings.permissions.tool.skill.description": "Ур чадварыг нэрээр нь ачаална уу",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1239,8 +1241,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Шинэ цагийн шугам",
   "settings.experimental.row.newTimeline.description":
     "Агентын хийсэн зүйлсийг бүлэглэж, ээлжийн доор нэг төлөвийн мөр харуулдаг шинэчилсэн сессийн цагийн шугам",
-  "settings.experimental.row.newQuestionUI.title": "Асуултын шинэ UI",
-  "settings.experimental.row.newQuestionUI.description": "Гарт тулгуурласан асуултын самбарыг урьдчилан үзэх",
   "settings.experimental.row.sidebarOrganize.title": "Босоо хажуугийн самбарыг цэгцлэх",
   "settings.experimental.row.sidebarOrganize.description":
     "Хажуугийн самбарт сессүүд хэрхэн жагсахыг сонгоно уу. Зөвхөн хажуугийн табуудад хамаарна.",

@@ -712,8 +712,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Lista filer i en katalog",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Kör skalkommandon",
+  "settings.permissions.tool.shell.description": "Kör skalkommandon",
   "settings.permissions.tool.task.title": "Uppgift",
   "settings.permissions.tool.task.description": "Starta underagenter",
+  "settings.permissions.tool.subagent.description": "Starta underagenter",
   "settings.permissions.tool.skill.title": "Färdighet",
   "settings.permissions.tool.skill.description": "Ladda en färdighet efter namn",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1232,8 +1234,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Ny tidslinje",
   "settings.experimental.row.newTimeline.description":
     "En omgjord sessionstidslinje som grupperar vad agenten gjorde, med en statusrad under turen",
-  "settings.experimental.row.newQuestionUI.title": "Nytt frågegränssnitt",
-  "settings.experimental.row.newQuestionUI.description": "Förhandsgranska den tangentbordsstyrda frågepanelen",
   "settings.experimental.row.sidebarOrganize.title": "Ordna vertikalt sidofält",
   "settings.experimental.row.sidebarOrganize.description":
     "Välj hur sessioner listas i sidofältet. Gäller endast sidoflikar.",

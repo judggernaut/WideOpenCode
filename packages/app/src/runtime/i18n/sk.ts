@@ -537,8 +537,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Zobraziť súbory v adresári",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Spustiť príkazy shellu",
+  "settings.permissions.tool.shell.description": "Spustiť príkazy shellu",
   "settings.permissions.tool.task.title": "Úloha",
   "settings.permissions.tool.task.description": "Spustiť podagentov",
+  "settings.permissions.tool.subagent.description": "Spustiť podagentov",
   "settings.permissions.tool.skill.title": "Zručnosť",
   "settings.permissions.tool.skill.description": "Načítať zručnosť podľa názvu",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1275,8 +1277,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Nová časová os",
   "settings.experimental.row.newTimeline.description":
     "Prepracovaná časová os relácie, ktorá zoskupuje činnosť agenta, s jedným stavovým riadkom pod krokom",
-  "settings.experimental.row.newQuestionUI.title": "Nové rozhranie otázok",
-  "settings.experimental.row.newQuestionUI.description": "Ukážka panela otázok ovládaného primárne klávesnicou",
   "settings.experimental.row.sidebarOrganize.title": "Usporiadanie zvislého bočného panela",
   "settings.experimental.row.sidebarOrganize.description":
     "Vyberte, ako sa relácie zobrazujú v bočnom paneli. Platí iba pre bočné karty.",

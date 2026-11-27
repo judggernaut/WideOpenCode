@@ -513,8 +513,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Рӯйхати файлҳо дар дохили директория",
   "settings.permissions.tool.bash.title": "Баш",
   "settings.permissions.tool.bash.description": "Фармонҳои shell -ро иҷро кунед",
+  "settings.permissions.tool.shell.description": "Фармонҳои shell -ро иҷро кунед",
   "settings.permissions.tool.task.title": "Вазифа",
   "settings.permissions.tool.task.description": "Зер-агентҳоро оғоз кунед",
+  "settings.permissions.tool.subagent.description": "Зер-агентҳоро оғоз кунед",
   "settings.permissions.tool.skill.title": "Маҳорат",
   "settings.permissions.tool.skill.description": "Маҳоратро бо ном бор кунед",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1245,8 +1247,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Ҷадвали вақти нав",
   "settings.experimental.row.newTimeline.description":
     "Ҷадвали вақти аз нав тарҳрезишудаи сессия, ки корҳои агентро гурӯҳбандӣ мекунад ва дар зери давр як сатри ҳолат дорад",
-  "settings.experimental.row.newQuestionUI.title": "Интерфейси нави саволҳо",
-  "settings.experimental.row.newQuestionUI.description": "Пешнамоиши панели саволҳо бо идоракунии асосан аз клавиатура",
   "settings.experimental.row.sidebarOrganize.title": "Ташкили панели паҳлӯи амудӣ",
   "settings.experimental.row.sidebarOrganize.description":
     "Интихоб кунед, ки сессияҳо дар панели паҳлӯ чӣ тавр нишон дода шаванд. Танҳо ба варақаҳои паҳлӯ дахл дорад.",

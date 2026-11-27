@@ -650,8 +650,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Listaa tiedostot hakemistossa",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Suorita shell-komennot",
+  "settings.permissions.tool.shell.description": "Suorita shell-komennot",
   "settings.permissions.tool.task.title": "Tehtävä",
   "settings.permissions.tool.task.description": "Käynnistä aliagentit",
+  "settings.permissions.tool.subagent.description": "Käynnistä aliagentit",
   "settings.permissions.tool.skill.title": "Taito",
   "settings.permissions.tool.skill.description": "Lataa taito nimen perusteella",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1228,8 +1230,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Uusi aikajana",
   "settings.experimental.row.newTimeline.description":
     "Uudistettu istunnon aikajana, joka ryhmittelee agentin toimet ja näyttää yhden tilarivin vuoron alla",
-  "settings.experimental.row.newQuestionUI.title": "Uusi kysymysnäkymä",
-  "settings.experimental.row.newQuestionUI.description": "Esikatsele näppäimistökeskeistä kysymyspaneelia",
   "settings.experimental.row.sidebarOrganize.title": "Järjestä pystysivupalkki",
   "settings.experimental.row.sidebarOrganize.description":
     "Valitse, miten istunnot luetellaan sivupalkissa. Koskee vain sivuvälilehtiä.",

@@ -662,8 +662,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "List filer i en mappe",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Kør shell-kommandoer",
+  "settings.permissions.tool.shell.description": "Kør shell-kommandoer",
   "settings.permissions.tool.task.title": "Opgave",
   "settings.permissions.tool.task.description": "Start underagenter",
+  "settings.permissions.tool.subagent.description": "Start underagenter",
   "settings.permissions.tool.skill.title": "Færdighed",
   "settings.permissions.tool.skill.description": "Indlæs en færdighed efter navn",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1283,8 +1285,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Ny tidslinje",
   "settings.experimental.row.newTimeline.description":
     "En nydesignet sessionstidslinje, der grupperer, hvad agenten gjorde, med én statuslinje under turen",
-  "settings.experimental.row.newQuestionUI.title": "Ny spørgsmålsvisning",
-  "settings.experimental.row.newQuestionUI.description": "Prøv den tastaturvenlige spørgsmålsdock",
   "settings.experimental.row.sidebarOrganize.title": "Organiser lodret sidepanel",
   "settings.experimental.row.sidebarOrganize.description":
     "Vælg, hvordan sessioner vises i sidepanelet. Gælder kun sidefaner.",

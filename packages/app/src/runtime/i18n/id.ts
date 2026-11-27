@@ -608,8 +608,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Daftarkan berkas dalam direktori",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Jalankan perintah shell",
+  "settings.permissions.tool.shell.description": "Jalankan perintah shell",
   "settings.permissions.tool.task.title": "Tugas",
   "settings.permissions.tool.task.description": "Luncurkan sub-agen",
+  "settings.permissions.tool.subagent.description": "Luncurkan sub-agen",
   "settings.permissions.tool.skill.title": "Keahlian",
   "settings.permissions.tool.skill.description": "Muat keahlian berdasarkan nama",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1294,8 +1296,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Garis waktu baru",
   "settings.experimental.row.newTimeline.description":
     "Garis waktu sesi yang didesain ulang, mengelompokkan apa yang dilakukan agen, dengan satu baris status di bawah giliran",
-  "settings.experimental.row.newQuestionUI.title": "UI pertanyaan baru",
-  "settings.experimental.row.newQuestionUI.description": "Pratinjau panel pertanyaan yang mengutamakan keyboard",
   "settings.experimental.row.sidebarOrganize.title": "Atur bilah sisi vertikal",
   "settings.experimental.row.sidebarOrganize.description":
     "Pilih cara sesi dicantumkan di bilah sisi. Hanya berlaku untuk tab samping.",

@@ -524,8 +524,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "ڈائریکٹری میں فائلوں کی فہرست بنائیں",
   "settings.permissions.tool.bash.title": "باش",
   "settings.permissions.tool.bash.description": "شیل کمانڈز چلائیں۔",
+  "settings.permissions.tool.shell.description": "شیل کمانڈز چلائیں۔",
   "settings.permissions.tool.task.title": "کام",
   "settings.permissions.tool.task.description": "ذیلی ایجنٹس چلائیں۔",
+  "settings.permissions.tool.subagent.description": "ذیلی ایجنٹس چلائیں۔",
   "settings.permissions.tool.skill.title": "ہنر",
   "settings.permissions.tool.skill.description": "نام سے ایک مہارت لوڈ کریں۔",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1242,8 +1244,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "نئی ٹائم لائن",
   "settings.experimental.row.newTimeline.description":
     "سیشن کی نئے انداز کی ٹائم لائن جو ایجنٹ کے کیے گئے کاموں کو گروپ کرتی ہے، اور باری کے نیچے ایک اسٹیٹس لائن دکھاتی ہے",
-  "settings.experimental.row.newQuestionUI.title": "سوالات کا نیا UI",
-  "settings.experimental.row.newQuestionUI.description": "کی بورڈ پر مبنی سوالات کے پینل کا پیش منظر دیکھیں",
   "settings.experimental.row.sidebarOrganize.title": "عمودی سائیڈ بار ترتیب دیں",
   "settings.experimental.row.sidebarOrganize.description":
     "منتخب کریں کہ سائیڈ بار میں سیشنز کیسے دکھائے جائیں۔ صرف سائیڈ ٹیبز پر لاگو ہوتا ہے۔",

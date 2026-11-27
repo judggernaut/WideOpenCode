@@ -527,8 +527,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "ޑައިރެކްޓަރީއެއްގެ ތެރޭގައި ފައިލްތައް ލިސްޓްކުރުން",
   "settings.permissions.tool.bash.title": "ބާޝް",
   "settings.permissions.tool.bash.description": "ޝެލް ކޮމާންޑްތައް ހިންގާށެވެ",
+  "settings.permissions.tool.shell.description": "ޝެލް ކޮމާންޑްތައް ހިންގާށެވެ",
   "settings.permissions.tool.task.title": "މަސައްކަތެއް",
   "settings.permissions.tool.task.description": "ސަބް އޭޖެންޓުން ލޯންޗުކުރުން",
+  "settings.permissions.tool.subagent.description": "ސަބް އޭޖެންޓުން ލޯންޗުކުރުން",
   "settings.permissions.tool.skill.title": "ހުނަރު",
   "settings.permissions.tool.skill.description": "ނަމުން ހުނަރެއް ލޯޑް ކުރާށެވެ",
   "settings.permissions.tool.lsp.title": "LSP އެވެ",
@@ -1269,8 +1271,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "އާ ޓައިމްލައިން",
   "settings.experimental.row.newTimeline.description":
     "އޭޖެންޓް ކުރި ކަންތައްތައް ގްރޫޕްކޮށް، ޓަރނުގެ ތިރީގައި އެއް ސްޓޭޓަސް ލައިން ދައްކާ އަލުން ޑިޒައިންކުރި ސެޝަން ޓައިމްލައިން",
-  "settings.experimental.row.newQuestionUI.title": "އާ ސުވާލު UI",
-  "settings.experimental.row.newQuestionUI.description": "ކީބޯޑަށް އިސްކަންދޭ ސުވާލު ޑޮކް ޕްރިވިއު ކުރާ",
   "settings.experimental.row.sidebarOrganize.title": "ވަރޓިކަލް ސައިޑްބާރ ތަރުތީބުކުރާ",
   "settings.experimental.row.sidebarOrganize.description":
     "ސައިޑްބާރުގައި ސެޝަންތައް ލިސްޓްކުރާނެ ގޮތް ހޮވާށެވެ. ފަރާތުގެ ޓެބްތަކަށް އެކަނި ފުދޭ.",

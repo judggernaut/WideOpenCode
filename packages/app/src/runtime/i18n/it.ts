@@ -672,8 +672,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Elenca i file all'interno di una directory",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Esegui i comandi della shell",
+  "settings.permissions.tool.shell.description": "Esegui i comandi della shell",
   "settings.permissions.tool.task.title": "Attività",
   "settings.permissions.tool.task.description": "Avvia subagenti",
+  "settings.permissions.tool.subagent.description": "Avvia subagenti",
   "settings.permissions.tool.skill.title": "Skill",
   "settings.permissions.tool.skill.description": "Carica una skill in base al nome",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1254,8 +1256,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Nuova sequenza temporale",
   "settings.experimental.row.newTimeline.description":
     "Una sequenza temporale della sessione riprogettata che raggruppa ciò che ha fatto l'agente, con una riga di stato sotto il turno",
-  "settings.experimental.row.newQuestionUI.title": "Nuova interfaccia delle domande",
-  "settings.experimental.row.newQuestionUI.description": "Anteprima del pannello delle domande pensato per la tastiera",
   "settings.experimental.row.sidebarOrganize.title": "Organizza la barra laterale verticale",
   "settings.experimental.row.sidebarOrganize.description":
     "Scegli come elencare le sessioni nella barra laterale. Si applica solo alle schede laterali.",

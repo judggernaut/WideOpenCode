@@ -528,8 +528,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "སྣོད་ཐོ་ཅིག་གི་ནང་འཁོད་ཡིག་སྣོད་ཚུ་ཐོ་བཀོད་འབད།",
   "settings.permissions.tool.bash.title": "Bash།",
   "settings.permissions.tool.bash.description": "ཤལ་བརྡ་བཀོད་ཚུ་གཡོག་བཀོལ།",
+  "settings.permissions.tool.shell.description": "ཤལ་བརྡ་བཀོད་ཚུ་གཡོག་བཀོལ།",
   "settings.permissions.tool.task.title": "ལཱ",
   "settings.permissions.tool.task.description": "ཡན་ལག་ལས་ཚབ་ཚུ་འགོ་བཙུགས།",
+  "settings.permissions.tool.subagent.description": "ཡན་ལག་ལས་ཚབ་ཚུ་འགོ་བཙུགས།",
   "settings.permissions.tool.skill.title": "རིག་རྩལ",
   "settings.permissions.tool.skill.description": "མིང་གིས་རིག་རྩལ་ཅིག་མངོན་གསལ་འབད།",
   "settings.permissions.tool.lsp.title": "LSP།",
@@ -1255,8 +1257,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "དུས་ཚོད་ཐིག་གསརཔ།",
   "settings.experimental.row.newTimeline.description":
     "ལས་ཚབ་ཀྱིས་འབད་མི་ཚུ་ སྡེ་ཚན་བཟོ་ཡོད་པའི་ ལཱ་ཡུན་དུས་ཚོད་ཐིག་ལོག་བཟོ་ཡོད་མི་ཅིག་ཨིན་ ཐེངས་ཀྱི་འོག་ལུ་ གནས་སྟངས་གྲལ་ཐིག་གཅིག་ཡོདཔ།",
-  "settings.experimental.row.newQuestionUI.title": "དྲི་བའི་ UI གསརཔ།",
-  "settings.experimental.row.newQuestionUI.description": "ལྡེ་སྒྲོམ་ལུ་གཙོ་བོར་བཏོན་མི་ དྲི་བའི་ལྡེབ་ སྔོན་ལྟ་འབད།",
   "settings.experimental.row.sidebarOrganize.title": "ཀེར་ཕྲང་ཟུར་ཁའི་ཕྲ་རིང་སྒྲིག",
   "settings.experimental.row.sidebarOrganize.description":
     "ཟུར་ཁའི་ཕྲ་རིང་ནང་ ལཱ་ཡུན་ཚུ་ ག་དེ་སྦེ་ཐོ་བཀོད་འབད་ནི་ཨིན་ན་ གདམ་ཁ་རྐྱབས། ཟུར་ཁའི་མཆོང་ལྡེ་ལུ་རྐྱངམ་ཅིག་འཇུགཔ་ཨིན།",

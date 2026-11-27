@@ -513,8 +513,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Listează fișierele dintr-un director",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Rulează comenzi shell",
+  "settings.permissions.tool.shell.description": "Rulează comenzi shell",
   "settings.permissions.tool.task.title": "Task",
   "settings.permissions.tool.task.description": "Pornește subagenți",
+  "settings.permissions.tool.subagent.description": "Pornește subagenți",
   "settings.permissions.tool.skill.title": "Skill",
   "settings.permissions.tool.skill.description": "Încarcă o abilitate după nume",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1259,9 +1261,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Cronologie nouă",
   "settings.experimental.row.newTimeline.description":
     "O cronologie a sesiunii reproiectată, care grupează ce a făcut agentul, cu o singură linie de stare sub rundă",
-  "settings.experimental.row.newQuestionUI.title": "Interfață nouă pentru întrebări",
-  "settings.experimental.row.newQuestionUI.description":
-    "Previzualizează panoul de întrebări optimizat pentru tastatură",
   "settings.experimental.row.sidebarOrganize.title": "Organizează bara laterală verticală",
   "settings.experimental.row.sidebarOrganize.description":
     "Alege cum sunt listate sesiunile în bara laterală. Se aplică doar filelor laterale.",

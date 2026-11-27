@@ -514,8 +514,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Uzskaitīt failus mapē",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Izpildīt čaulas komandas",
+  "settings.permissions.tool.shell.description": "Izpildīt čaulas komandas",
   "settings.permissions.tool.task.title": "Uzdevums",
   "settings.permissions.tool.task.description": "Palaist apakšaģentus",
+  "settings.permissions.tool.subagent.description": "Palaist apakšaģentus",
   "settings.permissions.tool.skill.title": "Prasme",
   "settings.permissions.tool.skill.description": "Ielādēt prasmi pēc nosaukuma",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1260,8 +1262,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Jauna laika skala",
   "settings.experimental.row.newTimeline.description":
     "Pārveidota sesijas laika skala, kas grupē aģenta paveikto, ar vienu statusa rindu zem gājiena",
-  "settings.experimental.row.newQuestionUI.title": "Jauna jautājumu saskarne",
-  "settings.experimental.row.newQuestionUI.description": "Priekšskatīt uz tastatūru orientētu jautājumu paneli",
   "settings.experimental.row.sidebarOrganize.title": "Kārtot vertikālo sānjoslu",
   "settings.experimental.row.sidebarOrganize.description":
     "Izvēlieties, kā sesijas tiek uzskaitītas sānjoslā. Attiecas tikai uz sānu cilnēm.",

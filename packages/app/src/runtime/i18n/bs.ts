@@ -535,8 +535,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Listanje datoteka unutar direktorija",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Pokretanje shell komandi",
+  "settings.permissions.tool.shell.description": "Pokretanje shell komandi",
   "settings.permissions.tool.task.title": "Zadatak",
   "settings.permissions.tool.task.description": "Pokretanje pod-agenta",
+  "settings.permissions.tool.subagent.description": "Pokretanje pod-agenta",
   "settings.permissions.tool.skill.title": "Vještina",
   "settings.permissions.tool.skill.description": "Učitaj vještinu po nazivu",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1312,8 +1314,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Nova vremenska linija",
   "settings.experimental.row.newTimeline.description":
     "Redizajnirana vremenska linija sesije koja grupiše šta je agent uradio, s jednom statusnom linijom ispod poteza",
-  "settings.experimental.row.newQuestionUI.title": "Novi interfejs za pitanja",
-  "settings.experimental.row.newQuestionUI.description": "Isprobajte panel za pitanja prilagođen tastaturi",
   "settings.experimental.row.sidebarOrganize.title": "Organizuj vertikalnu bočnu traku",
   "settings.experimental.row.sidebarOrganize.description":
     "Odaberite kako se sesije prikazuju na bočnoj traci. Primjenjuje se samo na bočne kartice.",

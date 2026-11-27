@@ -520,8 +520,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "فهرست کردن فایل ها در یک دایرکتوری",
   "settings.permissions.tool.bash.title": "ضربه شدید",
   "settings.permissions.tool.bash.description": "دستورات شل را اجرا کنید",
+  "settings.permissions.tool.shell.description": "دستورات شل را اجرا کنید",
   "settings.permissions.tool.task.title": "وظیفه",
   "settings.permissions.tool.task.description": "عوامل فرعی را راه اندازی کنید",
+  "settings.permissions.tool.subagent.description": "عوامل فرعی را راه اندازی کنید",
   "settings.permissions.tool.skill.title": "مهارت",
   "settings.permissions.tool.skill.description": "یک مهارت را با نام بارگیری کنید",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1223,8 +1225,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "خط زمانی جدید",
   "settings.experimental.row.newTimeline.description":
     "خط زمانی بازطراحی‌شده جلسه که کارهای عامل را گروه‌بندی می‌کند و یک خط وضعیت زیر هر نوبت دارد",
-  "settings.experimental.row.newQuestionUI.title": "رابط جدید سؤال",
-  "settings.experimental.row.newQuestionUI.description": "پیش‌نمایش پنل سؤال مبتنی بر صفحه‌کلید",
   "settings.experimental.row.sidebarOrganize.title": "سازمان‌دهی نوار کناری عمودی",
   "settings.experimental.row.sidebarOrganize.description":
     "نحوه فهرست شدن جلسه‌ها در نوار کناری را انتخاب کنید. فقط برای برگه‌های کناری اعمال می‌شود.",

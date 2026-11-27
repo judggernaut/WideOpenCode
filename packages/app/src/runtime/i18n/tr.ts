@@ -551,8 +551,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Bir dizindeki dosyaları listele",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Kabuk komutları çalıştır",
+  "settings.permissions.tool.shell.description": "Kabuk komutları çalıştır",
   "settings.permissions.tool.task.title": "Görev",
   "settings.permissions.tool.task.description": "Alt ajanlar başlat",
+  "settings.permissions.tool.subagent.description": "Alt ajanlar başlat",
   "settings.permissions.tool.skill.title": "Beceri",
   "settings.permissions.tool.skill.description": "Ada göre bir beceri yükle",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1304,8 +1306,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Yeni zaman çizelgesi",
   "settings.experimental.row.newTimeline.description":
     "Ajanın yaptıklarını gruplayan ve turun altında tek bir durum satırı gösteren yeniden tasarlanmış oturum zaman çizelgesi",
-  "settings.experimental.row.newQuestionUI.title": "Yeni soru arayüzü",
-  "settings.experimental.row.newQuestionUI.description": "Klavye öncelikli soru panelini önizleyin",
   "settings.experimental.row.sidebarOrganize.title": "Dikey kenar çubuğunu düzenle",
   "settings.experimental.row.sidebarOrganize.description":
     "Oturumların kenar çubuğunda nasıl listeleneceğini seçin. Yalnızca yan sekmelerde geçerlidir.",

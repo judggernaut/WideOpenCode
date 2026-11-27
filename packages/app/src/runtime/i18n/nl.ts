@@ -722,8 +722,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Geef bestanden in een map weer",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Voer shell-opdrachten uit",
+  "settings.permissions.tool.shell.description": "Voer shell-opdrachten uit",
   "settings.permissions.tool.task.title": "Taak",
   "settings.permissions.tool.task.description": "Start subagenten",
+  "settings.permissions.tool.subagent.description": "Start subagenten",
   "settings.permissions.tool.skill.title": "Vaardigheid",
   "settings.permissions.tool.skill.description": "Laad een vaardigheid op naam",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1244,8 +1246,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Nieuwe tijdlijn",
   "settings.experimental.row.newTimeline.description":
     "Een vernieuwde sessietijdlijn die groepeert wat de agent deed, met één statusregel onder de beurt",
-  "settings.experimental.row.newQuestionUI.title": "Nieuwe vraag-UI",
-  "settings.experimental.row.newQuestionUI.description": "Bekijk het vragenpaneel dat op het toetsenbord is gericht",
   "settings.experimental.row.sidebarOrganize.title": "Verticale zijbalk ordenen",
   "settings.experimental.row.sidebarOrganize.description":
     "Kies hoe sessies in de zijbalk worden weergegeven. Geldt alleen voor zijtabbladen.",

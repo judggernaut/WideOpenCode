@@ -566,8 +566,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "แสดงรายการไฟล์ภายในไดเรกทอรี",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "เรียกใช้คำสั่งเชลล์",
+  "settings.permissions.tool.shell.description": "เรียกใช้คำสั่งเชลล์",
   "settings.permissions.tool.task.title": "งาน",
   "settings.permissions.tool.task.description": "เปิดเอเจนต์ย่อย",
+  "settings.permissions.tool.subagent.description": "เปิดเอเจนต์ย่อย",
   "settings.permissions.tool.skill.title": "ทักษะ",
   "settings.permissions.tool.skill.description": "โหลดทักษะตามชื่อ",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1263,8 +1265,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "ไทม์ไลน์ใหม่",
   "settings.experimental.row.newTimeline.description":
     "ไทม์ไลน์เซสชันที่ออกแบบใหม่ ซึ่งจัดกลุ่มสิ่งที่เอเจนต์ทำ พร้อมบรรทัดสถานะเดียวใต้เทิร์น",
-  "settings.experimental.row.newQuestionUI.title": "UI คำถามใหม่",
-  "settings.experimental.row.newQuestionUI.description": "ดูตัวอย่างแผงคำถามที่เน้นการใช้แป้นพิมพ์",
   "settings.experimental.row.sidebarOrganize.title": "จัดระเบียบแถบด้านข้างแนวตั้ง",
   "settings.experimental.row.sidebarOrganize.description":
     "เลือกวิธีแสดงรายการเซสชันในแถบด้านข้าง ใช้กับแท็บด้านข้างเท่านั้น",

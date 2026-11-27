@@ -513,8 +513,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Listoni skedarët brenda një drejtorie",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Ekzekutoni komandat e guaskës",
+  "settings.permissions.tool.shell.description": "Ekzekutoni komandat e guaskës",
   "settings.permissions.tool.task.title": "Detyrë",
   "settings.permissions.tool.task.description": "Nisni nën-agjentët",
+  "settings.permissions.tool.subagent.description": "Nisni nën-agjentët",
   "settings.permissions.tool.skill.title": "Shkathtësi",
   "settings.permissions.tool.skill.description": "Ngarko një aftësi me emër",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1233,9 +1235,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Rrjedhë kohore e re",
   "settings.experimental.row.newTimeline.description":
     "Një rrjedhë kohore e ridizajnuar e sesionit që grupon atë që bëri agjenti, me një rresht statusi poshtë raundit",
-  "settings.experimental.row.newQuestionUI.title": "Ndërfaqe e re pyetjesh",
-  "settings.experimental.row.newQuestionUI.description":
-    "Shikoni paraprakisht panelin e pyetjeve të orientuar nga tastiera",
   "settings.experimental.row.sidebarOrganize.title": "Organizo shiritin anësor vertikal",
   "settings.experimental.row.sidebarOrganize.description":
     "Zgjidhni si renditen sesionet në shiritin anësor. Vlen vetëm për skedat anësore.",

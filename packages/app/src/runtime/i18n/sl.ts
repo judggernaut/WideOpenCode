@@ -537,8 +537,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Seznam datotek v imeniku",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Zagon lupinskih ukazov",
+  "settings.permissions.tool.shell.description": "Zagon lupinskih ukazov",
   "settings.permissions.tool.task.title": "Naloga",
   "settings.permissions.tool.task.description": "Zagon pod-agentov",
+  "settings.permissions.tool.subagent.description": "Zagon pod-agentov",
   "settings.permissions.tool.skill.title": "Spretnost",
   "settings.permissions.tool.skill.description": "Naloži veščino po imenu",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1273,8 +1275,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Nova časovnica",
   "settings.experimental.row.newTimeline.description":
     "Prenovljena časovnica seje, ki združi, kaj je agent naredil, z eno vrstico stanja pod korakom",
-  "settings.experimental.row.newQuestionUI.title": "Nov vmesnik za vprašanja",
-  "settings.experimental.row.newQuestionUI.description": "Predogled podokna za vprašanja, prilagojenega tipkovnici",
   "settings.experimental.row.sidebarOrganize.title": "Organiziraj navpično stransko vrstico",
   "settings.experimental.row.sidebarOrganize.description":
     "Izberite, kako so seje navedene v stranski vrstici. Velja samo za stranske zavihke.",

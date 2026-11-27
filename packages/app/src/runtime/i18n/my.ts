@@ -550,8 +550,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "လမ်းညွှန်တစ်ခုအတွင်း ဖိုင်များကို စာရင်းပြုစုပါ။",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "shell command များကို လုပ်ဆောင်ပါ။",
+  "settings.permissions.tool.shell.description": "shell command များကို လုပ်ဆောင်ပါ။",
   "settings.permissions.tool.task.title": "လုပ်ဆောင်စရာ",
   "settings.permissions.tool.task.description": "အေးဂျင့်ခွဲများကို စတင်ပါ။",
+  "settings.permissions.tool.subagent.description": "အေးဂျင့်ခွဲများကို စတင်ပါ။",
   "settings.permissions.tool.skill.title": "ကျွမ်းကျင်မှု",
   "settings.permissions.tool.skill.description": "အမည်ဖြင့် ကျွမ်းကျင်မှုတစ်ခုကို တင်ပါ။",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1239,8 +1241,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "အချိန်ဇယားအသစ်",
   "settings.experimental.row.newTimeline.description":
     "အေးဂျင့်လုပ်ဆောင်ခဲ့သည်များကို အုပ်စုဖွဲ့ပြီး အလှည့်အောက်တွင် အခြေအနေလိုင်းတစ်ကြောင်းပြသသော ပြန်လည်ဒီဇိုင်းထားသည့် စက်ရှင်အချိန်ဇယား",
-  "settings.experimental.row.newQuestionUI.title": "မေးခွန်း UI အသစ်",
-  "settings.experimental.row.newQuestionUI.description": "ကီးဘုတ်ဦးစားပေး မေးခွန်းအကွက်ကို အစမ်းကြည့်ပါ",
   "settings.experimental.row.sidebarOrganize.title": "ဒေါင်လိုက် ဘေးဘားကို စီစဉ်ရန်",
   "settings.experimental.row.sidebarOrganize.description":
     "ဘေးဘားတွင် စက်ရှင်များ စာရင်းပြပုံကို ရွေးပါ။ ဘေးတက်ဘ်များတွင်သာ သက်ရောက်သည်။",

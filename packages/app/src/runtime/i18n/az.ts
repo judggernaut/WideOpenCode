@@ -519,8 +519,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Qovluq daxilindəki faylları siyahıla",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Shell əmrlərini işlət",
+  "settings.permissions.tool.shell.description": "Shell əmrlərini işlət",
   "settings.permissions.tool.task.title": "Tapşırıq",
   "settings.permissions.tool.task.description": "Alt agentləri işə sal",
+  "settings.permissions.tool.subagent.description": "Alt agentləri işə sal",
   "settings.permissions.tool.skill.title": "Bacarıq",
   "settings.permissions.tool.skill.description": "Adla bacarıq yüklə",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1234,8 +1236,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Yeni zaman xətti",
   "settings.experimental.row.newTimeline.description":
     "Agentin etdiklərini qruplaşdıran və gedişin altında bir status sətri göstərən yenidən dizayn edilmiş sessiya zaman xətti",
-  "settings.experimental.row.newQuestionUI.title": "Yeni sual interfeysi",
-  "settings.experimental.row.newQuestionUI.description": "Klaviatura yönümlü sual panelinə önizləmə",
   "settings.experimental.row.sidebarOrganize.title": "Şaquli yan paneli təşkil et",
   "settings.experimental.row.sidebarOrganize.description":
     "Sessiyaların yan paneldə necə siyahılanacağını seçin. Yalnız yan tablara aiddir.",

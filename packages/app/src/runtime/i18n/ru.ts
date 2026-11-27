@@ -537,8 +537,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Список файлов в директории",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Запуск команд оболочки",
+  "settings.permissions.tool.shell.description": "Запуск команд оболочки",
   "settings.permissions.tool.task.title": "Task",
   "settings.permissions.tool.task.description": "Запуск субагентов",
+  "settings.permissions.tool.subagent.description": "Запуск субагентов",
   "settings.permissions.tool.skill.title": "Skill",
   "settings.permissions.tool.skill.description": "Загрузка навыка по имени",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1341,8 +1343,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Новая хронология",
   "settings.experimental.row.newTimeline.description":
     "Переработанная хронология сессии, которая группирует действия агента и показывает одну строку статуса под ходом",
-  "settings.experimental.row.newQuestionUI.title": "Новый интерфейс вопросов",
-  "settings.experimental.row.newQuestionUI.description": "Предпросмотр панели вопросов с управлением с клавиатуры",
   "settings.experimental.row.sidebarOrganize.title": "Упорядочить вертикальную боковую панель",
   "settings.experimental.row.sidebarOrganize.description":
     "Выберите, как сессии отображаются на боковой панели. Применяется только к боковым вкладкам.",

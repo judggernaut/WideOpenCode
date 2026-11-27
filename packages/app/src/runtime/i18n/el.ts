@@ -519,8 +519,10 @@ export const dict = {
   "settings.permissions.tool.list.description": "Λίστα αρχείων σε έναν κατάλογο",
   "settings.permissions.tool.bash.title": "Bash",
   "settings.permissions.tool.bash.description": "Εκτέλεση εντολών κελύφους",
+  "settings.permissions.tool.shell.description": "Εκτέλεση εντολών κελύφους",
   "settings.permissions.tool.task.title": "Εργασία",
   "settings.permissions.tool.task.description": "Εκκίνηση υπο-πρακτόρων",
+  "settings.permissions.tool.subagent.description": "Εκκίνηση υπο-πρακτόρων",
   "settings.permissions.tool.skill.title": "Ικανότητα",
   "settings.permissions.tool.skill.description": "Φόρτωση δεξιότητας με όνομα",
   "settings.permissions.tool.lsp.title": "LSP",
@@ -1258,9 +1260,6 @@ export const dict = {
   "settings.experimental.row.newTimeline.title": "Νέο χρονολόγιο",
   "settings.experimental.row.newTimeline.description":
     "Ανασχεδιασμένο χρονολόγιο συνεδρίας που ομαδοποιεί όσα έκανε ο πράκτορας, με μία γραμμή κατάστασης κάτω από τον γύρο",
-  "settings.experimental.row.newQuestionUI.title": "Νέο περιβάλλον ερωτήσεων",
-  "settings.experimental.row.newQuestionUI.description":
-    "Προεπισκόπηση του πλαισίου ερωτήσεων με προτεραιότητα στο πληκτρολόγιο",
   "settings.experimental.row.sidebarOrganize.title": "Οργάνωση κάθετης πλευρικής γραμμής",
   "settings.experimental.row.sidebarOrganize.description":
     "Επιλέξτε πώς εμφανίζονται οι συνεδρίες στην πλευρική γραμμή. Ισχύει μόνο για τις πλευρικές καρτέλες.",
